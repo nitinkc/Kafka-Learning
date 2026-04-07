@@ -1,0 +1,55 @@
+{
+  "type": "record",
+  "name": "AvroEvent",
+  "namespace": "com.demo.kafka.avro",
+  "doc": "Avro schema for Event messages. The Schema Registry enforces this schema on every produce call.",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Unique identifier for the event (UUID)"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "Category / type of the event, e.g. ORDER_CREATED"
+    },
+    {
+      "name": "payload",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional business payload as a JSON string"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Event creation time as epoch-millis"
+    },
+    {
+      "name": "simulateError",
+      "type": "boolean",
+      "default": false,
+      "doc": "Test flag: set true to simulate a processing error"
+    },
+    {
+      "name": "errorType",
+      "type": {
+        "type": "enum",
+        "name": "ErrorType",
+        "namespace": "com.demo.kafka.avro",
+        "symbols": ["NONE", "TRANSIENT", "PERMANENT", "DESERIALIZATION", "VALIDATION"],
+        "doc": "Error simulation type for testing Kafka error handling"
+      },
+      "default": "NONE",
+      "doc": "Which kind of error to simulate"
+    }
+  ]
+}
+
+
+
+
+

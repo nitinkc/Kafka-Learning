@@ -69,7 +69,31 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- ── Avro + Confluent Schema Registry ──────────────────────────────── -->
+		<!-- KafkaAvroSerializer validates the message against the registered     -->
+		<!-- Avro schema BEFORE sending it to the broker. If the payload does not -->
+		<!-- match the schema, a SerializationException is thrown at the producer -->
+		<!-- side – the message never reaches Kafka.                              -->
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>7.5.0</version>
+		</dependency>
 	</dependencies>
+
+	<!-- Confluent packages are not on Maven Central -->
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
@@ -96,6 +120,46 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<!-- Register generated Avro sources so the IDE resolves them -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-avro-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/avro</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Generate Java classes from src/main/avro/*.avsc -->
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.11.3</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>schema</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
+							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
+							<stringType>String</stringType>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

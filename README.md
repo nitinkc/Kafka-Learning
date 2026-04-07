@@ -1,21 +1,23 @@
 # Kafka Offset Demo — Startup Guide
 
-A Spring Boot application demonstrating Kafka offset management, manual acknowledgment, dead-letter topics (DLT), and exponential-backoff retry handling.
+A Spring Boot application demonstrating Kafka offset management, manual acknowledgment, dead-letter topics (DLT), exponential-backoff retry handling, and **Avro schema validation via Confluent Schema Registry**.
 
 ---
 
 ## Prerequisites
 
-| Tool | Version | Notes |
-|------|---------|-------|
-| Java | 24 | Set `JAVA_HOME` accordingly |
-| Maven | 3.9+ | Or use the included `./mvnw` wrapper |
-| Docker | 24+ | Docker Desktop recommended on macOS |
-| Docker Compose | v2+ | Bundled with Docker Desktop |
+| Tool           | Version  | Notes                                |
+|:---------------|:---------|:-------------------------------------|
+| Java           | 24       | Set `JAVA_HOME` accordingly          |
+| Maven          | 3.9+     | Or use the included `./mvnw` wrapper |
+| Docker         | 24+      | Docker Desktop recommended on macOS  |
+| Docker Compose | v2+      | Bundled with Docker Desktop          |
 
 ---
 
 ## Architecture Overview
+
+### JSON Flow (existing)
 
 ```
 REST Client
@@ -38,12 +40,42 @@ KafkaController  ──►  EventProducer  ──►  [events-topic]  (3 partiti
                                                                – logs & deletes record
 ```
 
+### Avro + Schema Registry Flow
+
+```
+REST Client
+    │
+    ▼  POST /api/kafka/avro/events
+KafkaController  ──►  AvroEventProducer
+                              │
+                              │  KafkaAvroSerializer
+                              ▼
+                  ┌─────────────────────────┐
+                  │  Confluent Schema        │
+                  │  Registry :8081          │◄── registers schema on first send
+                  │                          │    validates payload on every send
+                  └──────────┬──────────────┘
+                             │ ✅ schema valid → binary Avro bytes
+                             │ ❌ schema invalid → SerializationException
+                             │    (message NEVER reaches broker)
+                             ▼
+                    [avro-events-topic]  (3 partitions)
+                             │
+                             ▼
+                   AvroEventConsumer
+                   (avro-consumer-group)
+                   KafkaAvroDeserializer
+                   fetches schema from registry
+                   → validates bytes → typed AvroEvent
+```
+
 ### Kafka Topics
 
-| Topic | Partitions | Replicas | Consumer Group | Purpose |
-|-------|-----------|---------|----------------|---------|
-| `events-topic` | 3 | 1 | `manual-ack-group` | Main event stream |
-| `events-topic.DLT` | 1 | 1 | `dlt-consumer-group` | Dead-letter / failed events |
+| Topic               | Partitions | Replicas | Consumer Group        | Purpose                            |
+|:--------------------|:-----------|:---------|:----------------------|:-----------------------------------|
+| `events-topic`      | 3          | 1        | `manual-ack-group`    | Main JSON event stream             |
+| `events-topic.DLT`  | 1          | 1        | `dlt-consumer-group`  | Dead-letter / failed events        |
+| `avro-events-topic` | 3          | 1        | `avro-consumer-group` | Avro schema-validated event stream |
 
 > **Note:** `KafkaConfig` registers both topics as Spring beans (`NewTopic`). Spring Boot auto-creates them on startup — but only **after** Kafka is reachable. This is why the app fails if Kafka isn't ready first.
 
@@ -51,7 +83,7 @@ KafkaController  ──►  EventProducer  ──►  [events-topic]  (3 partiti
 
 ## Step-by-Step Startup
 
-### Step 1 — Start Infrastructure (Zookeeper + Kafka + Kafka-UI)
+### Step 1 — Start Infrastructure (Zookeeper + Kafka + Schema Registry + Kafka-UI)
 
 ```bash
 cd /path/to/Kafka-Learning
@@ -62,11 +94,12 @@ docker compose up -d
 
 Expected containers:
 
-| Container | Port | Role |
-|-----------|------|------|
-| `zookeeper` | 2181 | Coordination |
-| `kafka` | 9092 | Broker (host access) / 29092 (internal) |
-| `kafka-ui` | 8090 | Web UI → http://localhost:8090 |
+| Container         | Port  | Role                                    |
+|:------------------|:------|:----------------------------------------|
+| `zookeeper`       | 2181  | Coordination                            |
+| `kafka`           | 9092  | Broker (host access) / 29092 (internal) |
+| `schema-registry` | 8081  | Confluent Schema Registry               |
+| `kafka-ui`        | 8090  | Web UI → http://localhost:8090          |
 
 ### Step 2 — Wait for Kafka to be Healthy
 
@@ -89,6 +122,12 @@ docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list
 ```
 If the command returns (even with an empty list) without error, Kafka is ready.
 
+**Verify Schema Registry is up:**
+```bash
+curl -s http://localhost:8081/subjects
+# Expected: [] (empty list on first run)
+```
+
 ### Step 3 — (Optional but Recommended) Pre-create Kafka Topics
 
 Although Spring Boot will auto-create the topics via `KafkaConfig`, you can create them manually to guarantee they exist before the app connects. This prevents startup failures on slow machines.
@@ -109,15 +148,24 @@ docker exec kafka kafka-topics \
   --topic events-topic.DLT \
   --partitions 1 \
   --replication-factor 1
+
+# Avro topic — 3 partitions, replication factor 1
+docker exec kafka kafka-topics \
+  --bootstrap-server localhost:9092 \
+  --create --if-not-exists \
+  --topic avro-events-topic \
+  --partitions 3 \
+  --replication-factor 1
 ```
 
-Confirm both topics exist:
+Confirm all topics exist:
 ```bash
 docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list
 ```
 
 Expected output:
 ```
+avro-events-topic
 events-topic
 events-topic.DLT
 ```
@@ -147,8 +195,9 @@ Started KafkaOffsetDemoApplication in X.XXX seconds
 
 Open **http://localhost:8090** in your browser.
 
-- **Topics** tab → confirm `events-topic` (3 partitions) and `events-topic.DLT` (1 partition) are listed.
-- **Consumer Groups** tab → confirm `manual-ack-group` and `dlt-consumer-group` are registered.
+- **Topics** tab → confirm `events-topic` (3 partitions), `events-topic.DLT` (1 partition), and `avro-events-topic` (3 partitions) are listed.
+- **Consumer Groups** tab → confirm `manual-ack-group`, `dlt-consumer-group`, and `avro-consumer-group` are registered.
+- **Schema Registry** tab → after sending your first Avro event, `avro-events-topic-value` will appear here with the full schema.
 
 ---
 
@@ -260,12 +309,109 @@ curl -s -X POST "http://localhost:8080/api/kafka/events/test?eventType=ORDER_INV
 
 ### Error Types
 
-| `errorType` | Behaviour | Retries | Ends up in DLT? |
-|-------------|-----------|---------|-----------------|
-| `NONE` | Normal processing | — | No |
-| `TRANSIENT` | Throws `TransientException` | 3x (exponential backoff: 1s → 2s → 4s) | Yes |
-| `PERMANENT` | Throws `RuntimeException` | 3x | Yes |
-| `VALIDATION` | Throws `ValidationException` | 3x | Yes |
+| `errorType`  | Behaviour                    | Retries                                 | Ends up in DLT? |
+|:-------------|:-----------------------------|:----------------------------------------|:----------------|
+| `NONE`       | Normal processing            | —                                       | No              |
+| `TRANSIENT`  | Throws `TransientException`  | 3x (exponential backoff: 1s → 2s → 4s)  | Yes             |
+| `PERMANENT`  | Throws `RuntimeException`    | 3x                                      | Yes             |
+| `VALIDATION` | Throws `ValidationException` | 3x                                      | Yes             |
+
+---
+
+## Avro Schema Validation — Testing
+
+The Avro flow uses **Confluent Schema Registry** to enforce the `Event.avsc` schema at the producer side. A `KafkaAvroSerializer` validates every message _before_ it reaches the broker.
+
+### How it works
+
+1. The first `POST /api/kafka/avro/events` call **registers** the schema with Schema Registry.
+2. Every subsequent call **validates** the `AvroEvent` object against the registered schema.
+3. If validation fails → `SerializationException` is thrown → message is **rejected** and never written to Kafka.
+4. On the consumer side, `KafkaAvroDeserializer` fetches the writer schema from the registry and validates/converts the binary bytes back to a typed `AvroEvent`.
+
+### Send a valid Avro event
+
+```bash
+# Minimal — only required fields
+curl -s -X POST "http://localhost:8080/api/kafka/avro/events?eventType=ORDER_CREATED" | jq
+```
+
+Expected response:
+```json
+{
+  "status": "ACCEPTED",
+  "eventId": "3f7a1c2d-...",
+  "eventType": "ORDER_CREATED",
+  "topic": "avro-events-topic",
+  "schemaValidation": "PASSED – KafkaAvroSerializer validated against Schema Registry"
+}
+```
+
+```bash
+# With optional payload
+curl -s -X POST \
+  "http://localhost:8080/api/kafka/avro/events?eventType=ORDER_CREATED&payload=order-123" | jq
+
+# With all parameters
+curl -s -X POST \
+  "http://localhost:8080/api/kafka/avro/events?eventType=PAYMENT_PROCESSED&payload=txn-456&simulateError=false&errorType=NONE" | jq
+```
+
+### Send Avro events for all error types
+
+```bash
+# Transient error (retried 3x with backoff, then to DLT)
+curl -s -X POST \
+  "http://localhost:8080/api/kafka/avro/events?eventType=ORDER_FAILED&simulateError=true&errorType=TRANSIENT" | jq
+
+# Permanent error (goes straight to DLT after retries)
+curl -s -X POST \
+  "http://localhost:8080/api/kafka/avro/events?eventType=ORDER_FAILED&simulateError=true&errorType=PERMANENT" | jq
+
+# Validation error
+curl -s -X POST \
+  "http://localhost:8080/api/kafka/avro/events?eventType=ORDER_INVALID&simulateError=true&errorType=VALIDATION" | jq
+```
+
+### Inspect the registered schema in Schema Registry
+
+```bash
+# List all registered subjects (each topic gets a subject named <topic>-value)
+curl -s http://localhost:8081/subjects | jq
+
+# Fetch the latest schema for the Avro topic
+curl -s http://localhost:8081/subjects/avro-events-topic-value/versions/latest | jq
+
+# See just the schema JSON
+curl -s http://localhost:8081/subjects/avro-events-topic-value/versions/latest \
+  | jq '.schema | fromjson'
+```
+
+### Check schema compatibility
+
+```bash
+# List all versions of the schema (grows with every incompatible change)
+curl -s http://localhost:8081/subjects/avro-events-topic-value/versions | jq
+
+# Check the global compatibility level (default: BACKWARD)
+curl -s http://localhost:8081/config | jq
+```
+
+### Avro event parameters
+
+| Parameter       | Type     | Required | Default  | Description                                                               |
+|:----------------|:---------|:---------|:---------|:--------------------------------------------------------------------------|
+| `eventType`     | String   | ✅ Yes    | —        | Event category, e.g. `ORDER_CREATED`                                      |
+| `payload`       | String   | No       | `null`   | Optional business payload string                                          |
+| `simulateError` | Boolean  | No       | `false`  | Set `true` to trigger error simulation                                    |
+| `errorType`     | Enum     | No       | `NONE`   | `NONE` \| `TRANSIENT` \| `PERMANENT` \| `DESERIALIZATION` \| `VALIDATION` |
+
+### Watch Avro messages in Kafka-UI
+
+1. Open **http://localhost:8090** → **Topics** → `avro-events-topic` → **Messages** tab.
+2. Send an Avro event via `curl`.
+3. Kafka-UI decodes the Avro binary using the Schema Registry and displays the message as readable JSON.
+4. Go to **Schema Registry** tab → `avro-events-topic-value` to view and browse schema versions.
 
 ---
 
@@ -312,6 +458,18 @@ The broker advertises `localhost:9092` for host access and `kafka:29092` for int
 lsof -i :9092
 ```
 
+### Schema Registry connection refused / Avro send fails
+
+The `AvroEventProducer` contacts Schema Registry on every `send()`. If it is not running you will see:
+```
+SerializationException: Error registering Avro schema
+```
+
+**Fix:**
+1. Confirm Schema Registry is up: `curl -s http://localhost:8081/subjects`
+2. If the container is not running: `docker compose up -d schema-registry`
+3. Check its logs: `docker logs schema-registry`
+
 ### Port 8090 already in use (Kafka-UI)
 
 Change the host port in `docker-compose.yml`:
@@ -331,24 +489,41 @@ docker compose ps
 ## Project Structure
 
 ```
-src/main/java/com/demo/kafka/
-├── KafkaOffsetDemoApplication.java   # Spring Boot entry point
-├── config/
-│   └── KafkaConfig.java              # Topic definitions + error handler (DLT + retry)
-├── controller/
-│   └── KafkaController.java          # REST endpoints: POST /api/kafka/events
-├── producer/
-│   └── EventProducer.java            # Publishes events to events-topic
-├── consumer/
-│   ├── ManualAckConsumer.java        # Consumes events-topic (manual-ack-group)
-│   └── DeadLetterConsumer.java       # Consumes events-topic.DLT (dlt-consumer-group)
-├── service/
-│   └── EventProcessingService.java   # Business logic + error simulation
-├── handler/
-│   └── CustomErrorHandler.java       # TransientException / ValidationException types
-└── model/
-    ├── Event.java                    # Main event model
-    └── DeadLetterEvent.java          # DLT event model
+src/main/
+├── avro/
+│   └── Event.avsc                        # Avro schema definition (source of truth)
+│                                         # → generates AvroEvent.java + ErrorType.java
+└── java/com/demo/kafka/
+    ├── KafkaOffsetDemoApplication.java   # Spring Boot entry point
+    ├── config/
+    │   └── KafkaConfig.java              # JSON + Avro producer/consumer factories,
+    │                                     # topic definitions, error handler (DLT + retry)
+    ├── controller/
+    │   └── KafkaController.java          # REST endpoints:
+    │                                     #   POST /api/kafka/events        (JSON)
+    │                                     #   POST /api/kafka/events/test   (JSON)
+    │                                     #   POST /api/kafka/avro/events   (Avro)
+    ├── producer/
+    │   ├── EventProducer.java            # Publishes JSON events to events-topic
+    │   └── AvroEventProducer.java        # Publishes Avro events to avro-events-topic
+    │                                     # (KafkaAvroSerializer validates schema on send)
+    ├── consumer/
+    │   ├── ManualAckConsumer.java        # Consumes events-topic (manual-ack-group)
+    │   ├── AvroEventConsumer.java        # Consumes avro-events-topic (avro-consumer-group)
+    │   │                                 # (KafkaAvroDeserializer validates schema on receive)
+    │   └── DeadLetterConsumer.java       # Consumes events-topic.DLT (dlt-consumer-group)
+    ├── service/
+    │   └── EventProcessingService.java   # Business logic + error simulation
+    ├── handler/
+    │   └── CustomErrorHandler.java       # TransientException / ValidationException types
+    └── model/
+        ├── Event.java                    # JSON event model
+        └── DeadLetterEvent.java          # DLT event model
+
+# Generated at build time (do not edit):
+target/generated-sources/avro/com/demo/kafka/avro/
+    ├── AvroEvent.java                    # Generated from Event.avsc
+    └── ErrorType.java                    # Generated from Event.avsc (inline enum)
 ```
 
 ---
@@ -363,22 +538,65 @@ spring.application.name=kafka-offset-demo
 # Kafka broker
 spring.kafka.bootstrap-servers=localhost:9092
 
-# Topic names
+# Topic names (JSON flow)
 kafka.topics.main=events-topic
 kafka.topics.dlt=events-topic.DLT
 
-# Consumer — manual acknowledgment
-spring.kafka.listener.ack-mode=MANUAL_IMMEDIATE
+# Topic name (Avro flow)
+kafka.topics.avro=avro-events-topic
 
-# Producer — JSON serialization
-spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
-spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
-
-# Consumer — JSON deserialization
-spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
-spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
-spring.kafka.consumer.properties.spring.json.trusted.packages=*
+# Confluent Schema Registry — used by KafkaAvroSerializer/Deserializer
+kafka.schema-registry.url=http://localhost:8081
 ```
 
-> If `kafka.topics.main` or `kafka.topics.dlt` are not set in `application.properties`, the app will fail with `IllegalArgumentException: Could not resolve placeholder`. Make sure these properties are present.
+> If any of `kafka.topics.main`, `kafka.topics.dlt`, `kafka.topics.avro`, or `kafka.schema-registry.url` are missing from `application.properties`, the app will fail with `IllegalArgumentException: Could not resolve placeholder`.
+
+---
+
+## Consumer Acknowledgement
+
+### Is Acknowledgement Necessary from the Consumer?
+
+**It depends on the `AckMode` configured.** In this project, acknowledgement is **required and must be called manually**.
+
+### Configuration
+
+Both the JSON and Avro consumer factories are set to:
+
+```java
+factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+```
+
+And auto-commit is disabled:
+
+```java
+props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+```
+
+This means Kafka will **NOT** commit the offset automatically — the consumer code **must** call `ack.acknowledge()` explicitly, which `ManualAckConsumer` does:
+
+```java
+processingService.processEvent(event);
+ack.acknowledge();  // ✅ Required — commits the offset immediately
+```
+
+### What Happens If You Don't Call `ack.acknowledge()`?
+
+| Scenario                                    | Result                                                                      |
+|:--------------------------------------------|:----------------------------------------------------------------------------|
+| Processing succeeds, no `ack.acknowledge()` | Offset is **NOT committed** → message will be **re-consumed** after restart |
+| App crashes before `ack`                    | Message is **reprocessed** (at-least-once delivery)                         |
+| `ack.acknowledge()` called                  | Offset is committed → message is marked as consumed                         |
+
+### AckMode Options (Reference)
+
+| AckMode            | Description                                                                    |
+|:-------------------|:-------------------------------------------------------------------------------|
+| `AUTO` (default)   | Spring auto-commits after the listener returns                                 |
+| `MANUAL`           | You call `ack.acknowledge()`; committed at next poll interval                  |
+| `MANUAL_IMMEDIATE` | ✅ **Used in this project** — offset committed immediately when `ack` is called |
+| `RECORD`           | Auto-commits after each record is processed                                    |
+| `BATCH`            | Auto-commits after all records in a poll batch are processed                   |
+
+> **Summary:** Skipping `ack.acknowledge()` means offsets are never committed, and every consumer restart will re-read already-processed messages — causing **duplicate processing**.
 
