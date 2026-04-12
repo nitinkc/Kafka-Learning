@@ -7,7 +7,14 @@ on:
   workflow_dispatch:  # allow manual trigger from GitHub UI
 
 permissions:
-  contents: write   # needed to push to gh-pages branch
+  contents: read
+  pages: write       # needed to deploy to GitHub Pages
+  id-token: write    # needed for OIDC token (trusted deploy)
+
+# Only allow one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
 
@@ -44,12 +51,10 @@ jobs:
         run: mkdocs build --strict --clean
         # Output goes to ./site/
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: mkdocs-site
-          path: site/
-          retention-days: 1
+          path: site/   # upload the built site for the deploy stage
 
   # ─────────────────────────────────────────
   # Stage 2 — Deploy
@@ -59,32 +64,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: build       # only runs if build succeeds
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}  # GitHub sets this automatically
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Deploy to gh-pages branch
-        run: mkdocs gh-deploy --force --clean
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Print live site URL
         run: |
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "━━━━━━━━━��━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "  ✅ Deployment complete!"
-          echo "  🌐 Live URL: https://nitinkc.github.io/Kafka-Learning/"
+          echo "  🌐 Live URL: ${{ steps.deployment.outputs.page_url }}"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
