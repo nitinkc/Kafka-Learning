@@ -1,5 +1,7 @@
 # Kafka Offset Demo — Startup Guide
 
+[https://nitinkc.github.io/Kafka-Learning/](https://nitinkc.github.io/Kafka-Learning/)
+
 A Spring Boot application demonstrating Kafka offset management, manual acknowledgment, dead-letter topics (DLT), exponential-backoff retry handling, and **Avro schema validation via Confluent Schema Registry**.
 
 ---
