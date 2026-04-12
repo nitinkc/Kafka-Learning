@@ -1,0 +1,70 @@
+site_name: Apache Kafka Learning
+site_url: https://nitinkc.github.io/Kafka-Learning/
+site_description: >-
+  A practical, hands-on guide to Apache Kafka for Spring Boot / microservices developers.
+  Theory → Labs → Interview Prep, all grounded in a real working project.
+
+theme:
+  name: mkdocs
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+
+nav:
+  - Home: index.md
+  - Setup: setup.md
+
+  - Theory:
+    - theory/index.md
+    - "01 · Kafka Fundamentals": theory/01-kafka-fundamentals.md
+    - "02 · Spring Kafka Setup": theory/02-spring-kafka-setup.md
+    - "03 · Producers & Consumers": theory/03-producers-and-consumers.md
+    - "04 · Consumer Groups & Offsets": theory/04-consumer-groups-and-offsets.md
+    - "05 · Error Handling & DLT": theory/05-error-handling-and-dlt.md
+    - "06 · Avro & Schema Registry": theory/06-avro-and-schema-registry.md
+    - "07 · Advanced Patterns": theory/07-advanced-patterns.md
+
+  - Labs:
+    - labs/index.md
+    - "Lab 01 · Docker Setup": labs/lab-01-docker-setup.md
+    - "Lab 02 · First Producer & Consumer": labs/lab-02-first-producer-consumer.md
+    - "Lab 03 · Consumer Groups": labs/lab-03-consumer-groups.md
+    - "Lab 04 · Error Handling & Retry": labs/lab-04-error-handling.md
+    - "Lab 05 · Dead Letter Topic": labs/lab-05-dead-letter-topic.md
+    - "Lab 06 · Avro & Schema Registry": labs/lab-06-avro-schema-registry.md
+    - "Lab 07 · Advanced Scenarios": labs/lab-07-advanced-scenarios.md
+
+  - Interview Guide:
+    - interview-guide/index.md
+    - "Core Concepts Q&A": interview-guide/01-core-concepts-qa.md
+    - "Spring Kafka Q&A": interview-guide/02-spring-kafka-qa.md
+    - "Error Handling & Schema Q&A": interview-guide/03-error-handling-qa.md
+    - "Scenario & System Design": interview-guide/04-scenario-questions.md
+
+  - "🔗 GitHub": https://github.com/nitinkc/Kafka-Learning
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js
+  - https://unpkg.com/mermaid@10/dist/mermaid.js
+  - js/mermaid-init.js
+
+extra_css:
+  - https://unpkg.com/mermaid@10/dist/mermaid.css
+
+

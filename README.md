@@ -201,78 +201,6 @@ Open **http://localhost:8090** in your browser.
 
 ---
 
-## Kafka-UI — Full Guide
-
-Your `docker-compose.yml` already bundles **[Kafka-UI](https://github.com/provectuslabs/kafka-ui)** (by Provectus). No extra setup needed — it starts automatically with `docker compose up -d`.
-
-### Access
-
-```
-http://localhost:8090
-```
-
-The UI connects to the broker at `kafka:29092` (internal Docker network) and is pre-configured via `docker-compose.yml`:
-
-```yaml
-KAFKA_CLUSTERS_0_NAME: local
-KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
-```
-
----
-
-### What You Can Do in Kafka-UI
-
-#### 📋 Topics
-
-| Action                                    | How                                            |
-|:------------------------------------------|:-----------------------------------------------|
-| List all topics                           | **Topics** menu in left sidebar                |
-| See partition count, replication, offsets | Click on any topic name                        |
-| Browse messages live                      | Topic → **Messages** tab → click **Load More** |
-| Filter messages by offset, timestamp, key | Messages tab → use the filter bar at the top   |
-| Produce a test message manually           | Topic → **Produce Message** button             |
-| Delete a topic                            | Topic → **Delete Topic** button (top right)    |
-
-#### 👥 Consumer Groups
-
-| Action                   | How                                                 |
-|:-------------------------|:----------------------------------------------------|
-| List all consumer groups | **Consumers** menu in left sidebar                  |
-| See lag per partition    | Click on a consumer group (e.g. `manual-ack-group`) |
-| Reset consumer offsets   | Consumer group → **Reset Offsets** button           |
-
-#### 🔎 Brokers
-
-| Action                   | How                 |
-|:-------------------------|:--------------------|
-| See broker info & config | **Brokers** menu    |
-| Check cluster health     | Dashboard home page |
-
----
-
-### Useful Kafka-UI Workflows for This Project
-
-**1. Watch a message flow end-to-end**
-1. Open `events-topic` → **Messages** tab (keep it open)
-2. In a terminal, send a test event:
-   ```bash
-   curl -s -X POST "http://localhost:8080/api/kafka/events/test?eventType=ORDER_CREATED" | jq
-   ```
-3. Refresh Messages — you should see the new record appear with its partition and offset.
-
-**2. Watch a failed message land in the DLT**
-1. Open `events-topic.DLT` → **Messages** tab (keep it open)
-2. Send an error event:
-   ```bash
-   curl -s -X POST "http://localhost:8080/api/kafka/events/test?eventType=ORDER_FAILED&simulateError=true&errorType=PERMANENT" | jq
-   ```
-3. After ~3 retries, refresh Messages on the DLT — the failed record will appear with DLT headers (`dlt-original-topic`, `dlt-exception-message`).
-
-**3. Check consumer lag**
-1. Go to **Consumers** → `manual-ack-group`
-2. After sending events, lag should return to **0** once all messages are successfully acknowledged.
-
----
 
 ## Testing the Application
 
@@ -486,117 +414,21 @@ docker compose ps
 
 ---
 
-## Project Structure
 
-```
-src/main/
-├── avro/
-│   └── Event.avsc                        # Avro schema definition (source of truth)
-│                                         # → generates AvroEvent.java + ErrorType.java
-└── java/com/demo/kafka/
-    ├── KafkaOffsetDemoApplication.java   # Spring Boot entry point
-    ├── config/
-    │   └── KafkaConfig.java              # JSON + Avro producer/consumer factories,
-    │                                     # topic definitions, error handler (DLT + retry)
-    ├── controller/
-    │   └── KafkaController.java          # REST endpoints:
-    │                                     #   POST /api/kafka/events        (JSON)
-    │                                     #   POST /api/kafka/events/test   (JSON)
-    │                                     #   POST /api/kafka/avro/events   (Avro)
-    ├── producer/
-    │   ├── EventProducer.java            # Publishes JSON events to events-topic
-    │   └── AvroEventProducer.java        # Publishes Avro events to avro-events-topic
-    │                                     # (KafkaAvroSerializer validates schema on send)
-    ├── consumer/
-    │   ├── ManualAckConsumer.java        # Consumes events-topic (manual-ack-group)
-    │   ├── AvroEventConsumer.java        # Consumes avro-events-topic (avro-consumer-group)
-    │   │                                 # (KafkaAvroDeserializer validates schema on receive)
-    │   └── DeadLetterConsumer.java       # Consumes events-topic.DLT (dlt-consumer-group)
-    ├── service/
-    │   └── EventProcessingService.java   # Business logic + error simulation
-    ├── handler/
-    │   └── CustomErrorHandler.java       # TransientException / ValidationException types
-    └── model/
-        ├── Event.java                    # JSON event model
-        └── DeadLetterEvent.java          # DLT event model
+## Documentation
 
-# Generated at build time (do not edit):
-target/generated-sources/avro/com/demo/kafka/avro/
-    ├── AvroEvent.java                    # Generated from Event.avsc
-    └── ErrorType.java                    # Generated from Event.avsc (inline enum)
+**View locally:**
+
+Create and activate a virtual environment, then install dependencies:
+```shell
+python3 -m venv .venv && echo 'Created venv'
+source .venv/bin/activate
 ```
 
----
-
-## Key Configuration Properties
-
-Add/override these in `src/main/resources/application.properties`:
-
-```properties
-spring.application.name=kafka-offset-demo
-
-# Kafka broker
-spring.kafka.bootstrap-servers=localhost:9092
-
-# Topic names (JSON flow)
-kafka.topics.main=events-topic
-kafka.topics.dlt=events-topic.DLT
-
-# Topic name (Avro flow)
-kafka.topics.avro=avro-events-topic
-
-# Confluent Schema Registry — used by KafkaAvroSerializer/Deserializer
-kafka.schema-registry.url=http://localhost:8081
+Build and serve the documentation:
+```bash
+pip install -r requirements.txt
+mkdocs build
+mkdocs serve
+# Open http://localhost:8000
 ```
-
-> If any of `kafka.topics.main`, `kafka.topics.dlt`, `kafka.topics.avro`, or `kafka.schema-registry.url` are missing from `application.properties`, the app will fail with `IllegalArgumentException: Could not resolve placeholder`.
-
----
-
-## Consumer Acknowledgement
-
-### Is Acknowledgement Necessary from the Consumer?
-
-**It depends on the `AckMode` configured.** In this project, acknowledgement is **required and must be called manually**.
-
-### Configuration
-
-Both the JSON and Avro consumer factories are set to:
-
-```java
-factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
-```
-
-And auto-commit is disabled:
-
-```java
-props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-```
-
-This means Kafka will **NOT** commit the offset automatically — the consumer code **must** call `ack.acknowledge()` explicitly, which `ManualAckConsumer` does:
-
-```java
-processingService.processEvent(event);
-ack.acknowledge();  // ✅ Required — commits the offset immediately
-```
-
-### What Happens If You Don't Call `ack.acknowledge()`?
-
-| Scenario                                    | Result                                                                      |
-|:--------------------------------------------|:----------------------------------------------------------------------------|
-| Processing succeeds, no `ack.acknowledge()` | Offset is **NOT committed** → message will be **re-consumed** after restart |
-| App crashes before `ack`                    | Message is **reprocessed** (at-least-once delivery)                         |
-| `ack.acknowledge()` called                  | Offset is committed → message is marked as consumed                         |
-
-### AckMode Options (Reference)
-
-| AckMode            | Description                                                                    |
-|:-------------------|:-------------------------------------------------------------------------------|
-| `AUTO` (default)   | Spring auto-commits after the listener returns                                 |
-| `MANUAL`           | You call `ack.acknowledge()`; committed at next poll interval                  |
-| `MANUAL_IMMEDIATE` | ✅ **Used in this project** — offset committed immediately when `ack` is called |
-| `RECORD`           | Auto-commits after each record is processed                                    |
-| `BATCH`            | Auto-commits after all records in a poll batch are processed                   |
-
-> **Summary:** Skipping `ack.acknowledge()` means offsets are never committed, and every consumer restart will re-read already-processed messages — causing **duplicate processing**.
-
