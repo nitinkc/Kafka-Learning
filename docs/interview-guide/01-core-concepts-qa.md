@@ -11,6 +11,7 @@ Master these 15 core Kafka concepts that appear in **every** Kafka interview.
 **Answer:**
 
 A **Kafka broker** is a single server process that:
+
 - **Stores** partitions (copies of topic data) on disk
 - **Receives messages** from producers via `send()`
 - **Serves messages** to consumers via `fetch()`
@@ -58,6 +59,7 @@ public NewTopic mainTopic() {
 ```
 
 Three topics exist:
+
 - `events-topic` — main event stream
 - `events-topic.DLT` — dead-letter (failed events)
 - `avro-events-topic` — Avro-serialized events

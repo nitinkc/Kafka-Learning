@@ -172,6 +172,7 @@ events-topic (3 partitions)
 ```
 
 Rules:
+
 - Each partition is consumed by **exactly one** member of a group
 - If consumers > partitions, excess consumers sit idle
 - If consumers < partitions, some consumers handle multiple partitions

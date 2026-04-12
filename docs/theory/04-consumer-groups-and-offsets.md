@@ -23,6 +23,7 @@ events-topic (3 partitions)
 ```
 
 Rules:
+
 - Each partition → **at most one** consumer in the group
 - Excess consumers are **idle** (standby for failover)
 - Each group tracks its own committed offsets **independently**

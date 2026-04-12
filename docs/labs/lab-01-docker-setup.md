@@ -129,6 +129,7 @@ Topic: events-topic    PartitionCount: 3    ReplicationFactor: 1
 ```
 
 Key fields:
+
 - **PartitionCount** — 3, as configured in `KafkaConfig`
 - **Leader** — broker ID 1 (our single broker)
 - **ISR** — In-Sync Replicas (1 = just the leader, since RF=1)

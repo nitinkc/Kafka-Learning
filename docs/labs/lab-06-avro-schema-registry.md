@@ -118,6 +118,7 @@ curl -s -X POST \
 ```
 
 Wait ~7 seconds and observe:
+
 - App logs: `[AVRO]` retry attempts
 - DLT consumer logs: DLT message received
 

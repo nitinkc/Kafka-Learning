@@ -12,6 +12,7 @@ Real-world scenarios and system design questions — tests your ability to apply
 
 ### Scenario
 You're building a microservices system:
+
 - **Order Service** (producer) → publishes OrderCreated events
 - **Payment Service** (consumer) → debits account
 - **Fulfillment Service** (consumer) → ships order
