@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/labs/lab-07-advanced-scenarios/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Lab 07 · Advanced Scenarios - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../theory/" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lab-06-avro-schema-registry/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../interview-guide/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lab-07-advanced-scenarios" class="nav-link">Lab 07 · Advanced Scenarios</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-a-tuning-exponential-backoff" class="nav-link">Scenario A — Tuning Exponential Backoff</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-b-schema-evolution" class="nav-link">Scenario B — Schema Evolution</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-c-concurrency-and-partition-assignment" class="nav-link">Scenario C — Concurrency and Partition Assignment</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-d-end-to-end-event-flow-monitoring" class="nav-link">Scenario D — End-to-End Event Flow Monitoring</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-e-produce-with-kafka-cli-directly" class="nav-link">Scenario E — Produce with Kafka CLI Directly</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#scenario-f-kafka-ui-produce-consume" class="nav-link">Scenario F — Kafka-UI Produce &amp; Consume</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-you-learned" class="nav-link">What You Learned</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#labs-complete" class="nav-link">🎉 Labs Complete!</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lab-07-advanced-scenarios">Lab 07 · Advanced Scenarios</h1>
+<div class="admonition info">
+<p class="admonition-title">Theory</p>
+<p>Read <a href="../../theory/07-advanced-patterns/">07 · Advanced Patterns</a> first.</p>
+</div>
+<p><strong>Goal:</strong> Tune retry backoff, explore schema evolution, understand concurrency settings, and put it all together with an end-to-end event flow observation.</p>
+<p><strong>Time:</strong> ~30 minutes</p>
+<hr />
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>All previous labs complete</li>
+<li>Spring Boot app running</li>
+</ul>
+<hr />
+<h2 id="scenario-a-tuning-exponential-backoff">Scenario A — Tuning Exponential Backoff</h2>
+<h3 id="current-configuration">Current Configuration</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ExponentialBackOffWithMaxRetries</span><span class="w"> </span><span class="n">backOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setInitialInterval</span><span class="p">(</span><span class="mi">1000L</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1 second</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setMultiplier</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span><span class="w">          </span><span class="c1">// doubles each retry: 1s → 2s → 4s</span>
+</code></pre></div>
+<h3 id="experiment-1-faster-retry-dev-environment">Experiment 1: Faster Retry (Dev Environment)</h3>
+<p>In <code>KafkaConfig.java</code>, temporarily change:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setInitialInterval</span><span class="p">(</span><span class="mi">200L</span><span class="p">);</span><span class="w">  </span><span class="c1">// 200ms</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setMultiplier</span><span class="p">(</span><span class="mf">1.5</span><span class="p">);</span><span class="w">        </span><span class="c1">// 200ms → 300ms → 450ms</span>
+</code></pre></div>
+<p>Restart the app and trigger a TRANSIENT error:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_FAILED&amp;simulateError=true&amp;errorType=TRANSIENT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div></p>
+<p>Total DLT time should now be ~950ms instead of ~7 seconds.</p>
+<h3 id="experiment-2-more-retries">Experiment 2: More Retries</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ExponentialBackOffWithMaxRetries</span><span class="w"> </span><span class="n">backOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// 5 retries</span>
+</code></pre></div>
+<p>Observe 6 total attempts (1 original + 5 retries) before DLT routing.</p>
+<h3 id="checkpoint-a-verify-retry-timing-matches-your-configured-values">✅ Checkpoint A: Verify retry timing matches your configured values</h3>
+<p>Revert to original values (<code>3 retries, 1000ms, multiplier=2.0</code>) after the experiment.</p>
+<hr />
+<h2 id="scenario-b-schema-evolution">Scenario B — Schema Evolution</h2>
+<h3 id="adding-a-backward-compatible-field">Adding a Backward-Compatible Field</h3>
+<p>Edit <code>src/main/avro/Event.avsc</code> to add an optional <code>source</code> field:</p>
+<div class="highlight"><span class="filename">src/main/avro/Event.avsc (add after errorType field)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">&quot;doc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Origin service of this event, e.g. order-service&quot;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Rebuild:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./mvnw<span class="w"> </span>clean<span class="w"> </span>compile
+</code></pre></div></p>
+<p>The Avro Maven plugin regenerates <code>AvroEvent.java</code> with the new field.</p>
+<p>Restart the app and send an event:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/avro/events?eventType=ORDER_CREATED&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div></p>
+<p>Check Schema Registry — a <strong>new version</strong> should be registered:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Should now show [1, 2]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8081/subjects/avro-events-topic-value/versions<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div></p>
+<h3 id="checkpoint-b1-two-schema-versions-registered-old-consumers-can-still-read-new-messages">✅ Checkpoint B1: Two schema versions registered — old consumers can still read new messages</h3>
+<p>Old messages (written with schema v1) are still readable by the new consumer (schema v2 with default <code>source=null</code>). <strong>BACKWARD compatible</strong> ✅</p>
+<h3 id="checkpoint-b2-revert-the-schema-change">✅ Checkpoint B2: Revert the schema change</h3>
+<p>Remove the <code>source</code> field from <code>Event.avsc</code> and rebuild before continuing. This would be a <strong>breaking change</strong> in production (removing a field), but since this is a fresh learning environment, it's fine to revert.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># After reverting, the schema registry still has v1 and v2</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># The app will re-register v1 (which is still compatible since we&#39;re going backward)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>./mvnw<span class="w"> </span>clean<span class="w"> </span>compile
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>./mvnw<span class="w"> </span>spring-boot:run
+</code></pre></div>
+<hr />
+<h2 id="scenario-c-concurrency-and-partition-assignment">Scenario C — Concurrency and Partition Assignment</h2>
+<h3 id="current-single-thread">Current: Single Thread</h3>
+<p>The project uses default concurrency (1 thread per listener). One thread handles all 3 partitions sequentially within a poll loop.</p>
+<h3 id="enable-multi-thread-consuming">Enable Multi-Thread Consuming</h3>
+<p>In <code>KafkaConfig.java</code>, add concurrency to the JSON consumer factory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConcurrentKafkaListenerContainerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">kafkaListenerContainerFactory</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConcurrentKafkaListenerContainerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="p">();</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="na">setConsumerFactory</span><span class="p">(</span><span class="n">consumerFactory</span><span class="p">);</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="na">setConcurrency</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// ← add this line: 1 thread per partition</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Restart the app. In Kafka-UI → Consumers → <code>manual-ack-group</code>, you'll see <strong>3 individual members</strong> instead of 1, each assigned one partition.</p>
+<p>Send 9 events rapidly:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..9<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=CONCURRENT_</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">done</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">wait</span>
+</code></pre></div></p>
+<h3 id="checkpoint-c-with-concurrency3-all-3-partitions-consumed-simultaneously">✅ Checkpoint C: With concurrency=3, all 3 partitions consumed simultaneously</h3>
+<p>Revert <code>setConcurrency(3)</code> to avoid unexpected parallel behaviour in later labs.</p>
+<hr />
+<h2 id="scenario-d-end-to-end-event-flow-monitoring">Scenario D — End-to-End Event Flow Monitoring</h2>
+<p>Set up a "mission control" view with everything open simultaneously.</p>
+<h3 id="open-4-terminal-panes">Open 4 terminal panes</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Pane 1: App logs (already running)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Pane 2: Watch main topic</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>kafka<span class="w"> </span>kafka-console-consumer<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span>--topic<span class="w"> </span>events-topic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span>--from-beginning<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span>--property<span class="w"> </span>print.partition<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span>--property<span class="w"> </span>print.offset<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">  </span>--property<span class="w"> </span>print.key<span class="o">=</span><span class="nb">true</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1"># Pane 3: Watch DLT</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>kafka<span class="w"> </span>kafka-console-consumer<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">  </span>--topic<span class="w"> </span>events-topic.DLT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">  </span>--from-beginning
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="c1"># Pane 4: Watch Avro topic (binary, not human-readable without Avro tools)</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>kafka<span class="w"> </span>kafka-console-consumer<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">  </span>--topic<span class="w"> </span>avro-events-topic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">  </span>--from-beginning
+</code></pre></div>
+<h3 id="run-a-full-sequence">Run a full sequence</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Normal JSON event</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=FLOW_NORMAL&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Failing JSON event → DLT</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=FLOW_FAIL&amp;simulateError=true&amp;errorType=PERMANENT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># Avro event</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/avro/events?eventType=FLOW_AVRO&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<h3 id="checkpoint-d-observe-each-events-journey-in-the-correct-pane">✅ Checkpoint D: Observe each event's journey in the correct pane</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Appears In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FLOW_NORMAL</code></td>
+<td>Main topic pane + App log (consumed, acknowledged)</td>
+</tr>
+<tr>
+<td><code>FLOW_FAIL</code></td>
+<td>Main topic pane (briefly) → DLT pane (after retries)</td>
+</tr>
+<tr>
+<td><code>FLOW_AVRO</code></td>
+<td>Avro topic pane (binary)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="scenario-e-produce-with-kafka-cli-directly">Scenario E — Produce with Kafka CLI Directly</h2>
+<p>Bypass the Spring Boot app and produce raw JSON to Kafka:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>kafka<span class="w"> </span>kafka-console-producer<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>--topic<span class="w"> </span>events-topic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;key.separator=:&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;parse.key=true&quot;</span>
+</code></pre></div>
+<p>Type:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>cli-key-001:{&quot;eventId&quot;:&quot;cli-001&quot;,&quot;eventType&quot;:&quot;CLI_EVENT&quot;,&quot;simulateError&quot;:false,&quot;errorType&quot;:&quot;NONE&quot;,&quot;timestamp&quot;:&quot;2026-04-11T10:00:00&quot;,&quot;payload&quot;:&quot;from CLI&quot;}
+</code></pre></div></p>
+<p>Press <code>Ctrl+C</code>.</p>
+<p>Watch the app logs — <code>ManualAckConsumer</code> will pick it up and try to deserialise. If the JSON is valid, it processes normally; if malformed, it goes to DLT.</p>
+<h3 id="checkpoint-e-cli-produced-json-event-consumed-by-spring-boot-app">✅ Checkpoint E: CLI-produced JSON event consumed by Spring Boot app</h3>
+<hr />
+<h2 id="scenario-f-kafka-ui-produce-consume">Scenario F — Kafka-UI Produce &amp; Consume</h2>
+<ol>
+<li>Open <a href="http://localhost:8090">http://localhost:8090</a> → <strong>Topics → events-topic</strong></li>
+<li>Click <strong>Produce Message</strong></li>
+<li>Set:</li>
+<li><strong>Key:</strong> <code>ui-key-001</code></li>
+<li><strong>Value:</strong> <code>{"eventId":"ui-001","eventType":"UI_EVENT","simulateError":false,"errorType":"NONE","timestamp":"2026-04-11T10:00:00","payload":"from Kafka-UI"}</code></li>
+<li>Click <strong>Produce</strong></li>
+<li>Watch the app logs consume it</li>
+</ol>
+<h3 id="checkpoint-f-kafka-ui-produced-message-consumed-by-the-spring-boot-app">✅ Checkpoint F: Kafka-UI produced message consumed by the Spring Boot app</h3>
+<hr />
+<h2 id="what-you-learned">What You Learned</h2>
+<ul>
+<li>✅ Tuned exponential backoff parameters and observed the timing difference</li>
+<li>✅ Added a backward-compatible Avro field and observed schema versioning in the registry</li>
+<li>✅ Set <code>concurrency=3</code> and saw 3 consumer threads assigned to 3 partitions</li>
+<li>✅ Ran an end-to-end flow with all 4 topics visible simultaneously</li>
+<li>✅ Produced messages via CLI and Kafka-UI (bypassing the Spring Boot producer)</li>
+</ul>
+<hr />
+<h2 id="labs-complete">🎉 Labs Complete!</h2>
+<p>You've completed all 7 labs. Head to the <a href="../../interview-guide/">Interview Guide</a> to prepare for interviews.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/interview-guide/02-spring-kafka-qa/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Spring Kafka Q&A - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../theory/" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../01-core-concepts-qa/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../03-error-handling-qa/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#interview-qa-spring-kafka" class="nav-link">Interview Q&amp;A · Spring Kafka</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-what-is-kafkatemplate" class="nav-link">1. 🟢 What is KafkaTemplate?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-what-is-kafkalistener" class="nav-link">2. 🟢 What is @KafkaListener?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-what-is-producerfactory" class="nav-link">3. 🟢 What is ProducerFactory?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-what-is-consumerfactory" class="nav-link">4. 🟢 What is ConsumerFactory?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-what-is-concurrentkafkalistenercontainerfactory" class="nav-link">5. 🟡 What is ConcurrentKafkaListenerContainerFactory?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#6-what-are-serializers-and-deserializers" class="nav-link">6. 🟡 What are Serializers and Deserializers?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#7-what-is-ackmode-and-why-does-it-matter" class="nav-link">7. 🟡 What is AckMode and Why Does It Matter?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#8-what-is-enable_auto_commit_config" class="nav-link">8. 🟡 What is ENABLE_AUTO_COMMIT_CONFIG?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#9-what-is-auto_offset_reset_config" class="nav-link">9. 🟡 What is AUTO_OFFSET_RESET_CONFIG?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#10-what-is-defaulterrorhandler" class="nav-link">10. 🔴 What is DefaultErrorHandler?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#11-what-is-deadletterpublishingrecoverer" class="nav-link">11. 🔴 What is DeadLetterPublishingRecoverer?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-what-is-exponentialbackoffwithmaxretries" class="nav-link">12. 🔴 What is ExponentialBackOffWithMaxRetries?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-what-is-kafkaavroserializer" class="nav-link">13. 🔴 What is KafkaAvroSerializer?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-what-is-kafkaavrodeserializer" class="nav-link">14. 🔴 What is KafkaAvroDeserializer?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#15-what-is-the-difference-between-producer-throughput-and-durability" class="nav-link">15. 🔴 What is the Difference Between Producer Throughput and Durability?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-table" class="nav-link">Summary Table</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="interview-qa-spring-kafka">Interview Q&amp;A · Spring Kafka</h1>
+<p>Master these 15 Spring Kafka concepts — key to Spring Boot microservices interviews.</p>
+<hr />
+<h2 id="1-what-is-kafkatemplate">1. 🟢 What is KafkaTemplate?</h2>
+<p><strong>Q:</strong> What is KafkaTemplate and how do you use it to send messages?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>KafkaTemplate</strong> is Spring's abstraction for sending messages to Kafka. It wraps the native Kafka <code>KafkaProducer</code> and provides:
+- Synchronous send with callback
+- Asynchronous send with <code>ListenableFuture</code>
+- Serialization/deserialization</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">kafkaTemplate</span><span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="n">ProducerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">producerFactory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">producerFactory</span><span class="p">);</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage in EventProducer:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EventProducer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mainTopic</span><span class="p">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="nf">sendEvent</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mainTopic</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getEventId</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">);</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Sent event: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">getEventId</span><span class="p">());</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">event</span><span class="p">;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters:</strong>
+- <code>mainTopic</code> — topic name
+- <code>event.getEventId()</code> — message key (determines partition)
+- <code>event</code> — message value (serialized to JSON)</p>
+<hr />
+<h2 id="2-what-is-kafkalistener">2. 🟢 What is @KafkaListener?</h2>
+<p><strong>Q:</strong> Explain @KafkaListener. How does it work?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>@KafkaListener</strong> is Spring's annotation for consuming messages from Kafka. It:
+- Declares a <strong>consumer group</strong>
+- Specifies <strong>which topics</strong> to subscribe to
+- Handles <strong>serialization/deserialization</strong>
+- Manages <strong>offset commits</strong> (configurable)</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Component</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ManualAckConsumer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">                   </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;manual-ack-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">            </span><span class="nd">@Payload</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">            </span><span class="nd">@Header</span><span class="p">(</span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">RECEIVED_PARTITION</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">partition</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="nd">@Header</span><span class="p">(</span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">OFFSET</span><span class="p">)</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">            </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Received - Partition: {}, Offset: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">partition</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="n">processingService</span><span class="p">.</span><span class="na">processEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">  </span><span class="c1">// ← Manual offset commit</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Key annotations:</strong>
+- <code>@Payload Event event</code> — Deserialized message value
+- <code>@Header(...)</code> — Message metadata (partition, offset, timestamp, etc.)
+- <code>Acknowledgment ack</code> — Manual offset control (only in <code>MANUAL_IMMEDIATE</code> mode)</p>
+<p><strong>How it works internally:</strong>
+1. Spring creates a <code>ConcurrentKafkaListenerContainerFactory</code>
+2. It spawns a <strong>listener container</strong> that polls Kafka in the background
+3. On each poll, the container invokes the <code>@KafkaListener</code> method
+4. After the method returns (or throws), offsets are committed (if auto-commit enabled)</p>
+<hr />
+<h2 id="3-what-is-producerfactory">3. 🟢 What is ProducerFactory?</h2>
+<p><strong>Q:</strong> What is ProducerFactory? Why do you need it?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>ProducerFactory</strong> is a Spring factory that creates <strong>KafkaProducer</strong> instances. It:
+- Configures producer settings (bootstrap servers, serializers, acks, etc.)
+- Caches producer instances for reuse (lightweight)
+- Manages producer lifecycle</p>
+<p><strong>In this project (JSON):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ProducerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">producerFactory</span><span class="p">(</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">kafkaObjectMapper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">BOOTSTRAP_SERVERS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="n">bootstrapServers</span><span class="p">);</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">// Custom serializer for JSON</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">Serializer</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">valueSerializer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Serializer</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nd">@Override</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">serialize</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">kafkaObjectMapper</span><span class="p">.</span><span class="na">writeValueAsBytes</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SerializationException</span><span class="p">(</span><span class="s">&quot;Error serializing JSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultKafkaProducerFactory</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">StringSerializer</span><span class="p">(),</span><span class="w"> </span><span class="n">valueSerializer</span><span class="p">);</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>In this project (Avro):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ProducerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">SpecificRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">avroProducerFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">BOOTSTRAP_SERVERS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="n">bootstrapServers</span><span class="p">);</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">VALUE_SERIALIZER_CLASS_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="n">KafkaAvroSerializer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">AbstractKafkaSchemaSerDeConfig</span><span class="p">.</span><span class="na">SCHEMA_REGISTRY_URL_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="n">schemaRegistryUrl</span><span class="p">);</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultKafkaProducerFactory</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">);</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Why separate factories?</strong>
+- JSON producer uses custom Jackson serializer
+- Avro producer uses Confluent's KafkaAvroSerializer (different config)
+- Each can have different retry policies, timeouts, etc.</p>
+<hr />
+<h2 id="4-what-is-consumerfactory">4. 🟢 What is ConsumerFactory?</h2>
+<p><strong>Q:</strong> What is ConsumerFactory? How is it different from ProducerFactory?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>ConsumerFactory</strong> is a Spring factory that creates <strong>KafkaConsumer</strong> instances. It:
+- Configures consumer settings (bootstrap servers, deserializers, group id, offsets, etc.)
+- Caches consumer instances
+- Manages consumer lifecycle</p>
+<p><strong>In this project (JSON):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConsumerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">consumerFactory</span><span class="p">(</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">kafkaObjectMapper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">Deserializer</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span><span class="n">valueDeserializer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Deserializer</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="nd">@Override</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="nf">deserialize</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">kafkaObjectMapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SerializationException</span><span class="p">(</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">                    </span><span class="s">&quot;Error deserializing JSON to Event&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">BOOTSTRAP_SERVERS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="n">bootstrapServers</span><span class="p">);</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_OFFSET_RESET_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;latest&quot;</span><span class="p">);</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">ENABLE_AUTO_COMMIT_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultKafkaConsumerFactory</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">StringDeserializer</span><span class="p">(),</span><span class="w"> </span><span class="n">valueDeserializer</span><span class="p">);</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Key differences:</strong>
+- <strong>ProducerFactory</strong> → sends data (serializes Event → bytes)
+- <strong>ConsumerFactory</strong> → receives data (deserializes bytes → Event)</p>
+<hr />
+<h2 id="5-what-is-concurrentkafkalistenercontainerfactory">5. 🟡 What is ConcurrentKafkaListenerContainerFactory?</h2>
+<p><strong>Q:</strong> What does ConcurrentKafkaListenerContainerFactory do?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>ConcurrentKafkaListenerContainerFactory</strong> creates <strong>listener containers</strong> — background threads that:
+- <strong>Poll</strong> Kafka for messages
+- <strong>Invoke</strong> <code>@KafkaListener</code> methods
+- <strong>Manage</strong> offsets and error handling</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConcurrentKafkaListenerContainerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nf">kafkaListenerContainerFactory</span><span class="p">(</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">            </span><span class="n">ConsumerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumerFactory</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">            </span><span class="n">DefaultErrorHandler</span><span class="w"> </span><span class="n">errorHandler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">ConcurrentKafkaListenerContainerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Event</span><span class="o">&gt;</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ConcurrentKafkaListenerContainerFactory</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="na">setConsumerFactory</span><span class="p">(</span><span class="n">consumerFactory</span><span class="p">);</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="na">getContainerProperties</span><span class="p">()</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="p">.</span><span class="na">setAckMode</span><span class="p">(</span><span class="n">ContainerProperties</span><span class="p">.</span><span class="na">AckMode</span><span class="p">.</span><span class="na">MANUAL_IMMEDIATE</span><span class="p">);</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="na">setCommonErrorHandler</span><span class="p">(</span><span class="n">errorHandler</span><span class="p">);</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">factory</span><span class="p">;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Key configurations:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setConsumerFactory()</code></td>
+<td>Which deserializer to use</td>
+</tr>
+<tr>
+<td><code>setAckMode()</code></td>
+<td>When to commit offsets (AUTO, MANUAL, etc.)</td>
+</tr>
+<tr>
+<td><code>setCommonErrorHandler()</code></td>
+<td>What to do on errors (retry, DLT, etc.)</td>
+</tr>
+<tr>
+<td><code>setConcurrency()</code></td>
+<td>Number of consumer threads</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How it works:</strong>
+1. Spring detects <code>@KafkaListener</code> method
+2. Creates a listener container using this factory
+3. Container spawns N threads (concurrency = N)
+4. Each thread polls Kafka in a loop, invokes the method</p>
+<hr />
+<h2 id="6-what-are-serializers-and-deserializers">6. 🟡 What are Serializers and Deserializers?</h2>
+<p><strong>Q:</strong> Explain serializers and deserializers in Kafka. Why are they needed?</p>
+<p><strong>Answer:</strong></p>
+<p>Kafka stores <strong>bytes</strong>, not objects. Serializers/deserializers convert between Java objects and bytes.</p>
+<p><strong>Producer: Serialize (Object → bytes)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Event</span><span class="p">(</span><span class="s">&quot;evt-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ORDER_CREATED&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializer</span><span class="p">.</span><span class="na">serialize</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">// bytes = {0x7B, 0x22, 0x65, ...} (JSON: {&quot;e&quot;...})</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Consumer: Deserialize (bytes → Object)</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x7B</span><span class="p">,</span><span class="w"> </span><span class="mh">0x22</span><span class="p">,</span><span class="w"> </span><span class="mh">0x65</span><span class="p">,</span><span class="w"> </span><span class="p">...};</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deserializer</span><span class="p">.</span><span class="na">deserialize</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1">// event = Event(eventId=&quot;evt-001&quot;, eventType=&quot;ORDER_CREATED&quot;, ...)</span>
+</code></pre></div></p>
+<p><strong>Common Serializers:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Class</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JSON</td>
+<td>Jackson's <code>JsonSerializer</code></td>
+<td><code>{"eventId":"...", ...}</code> (text)</td>
+</tr>
+<tr>
+<td>Avro</td>
+<td><code>KafkaAvroSerializer</code></td>
+<td>Binary (validated against schema)</td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>StringSerializer</code></td>
+<td>Plain text</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td><code>IntegerSerializer</code></td>
+<td>4 bytes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// JSON serializer (custom Jackson-based)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">Serializer</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">jsonSerializer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Serializer</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">serialize</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">kafkaObjectMapper</span><span class="p">.</span><span class="na">writeValueAsBytes</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">};</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1">// Avro serializer (Confluent)</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">VALUE_SERIALIZER_CLASS_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="n">KafkaAvroSerializer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="7-what-is-ackmode-and-why-does-it-matter">7. 🟡 What is AckMode and Why Does It Matter?</h2>
+<p><strong>Q:</strong> Explain the different AckMode options and when to use each.</p>
+<p><strong>Answer:</strong></p>
+<p><strong>AckMode</strong> controls <strong>when offsets are committed</strong> (recorded as "processed").</p>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>When Offset Commits</th>
+<th>Risk</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AUTO</code></td>
+<td>After listener returns</td>
+<td>May commit before processing done</td>
+<td>Simple, non-critical apps</td>
+</tr>
+<tr>
+<td><code>MANUAL</code></td>
+<td>When <code>ack.acknowledge()</code> called</td>
+<td>Manual code required</td>
+<td>Exactly-once semantics</td>
+</tr>
+<tr>
+<td><code>MANUAL_IMMEDIATE</code></td>
+<td>✅ <strong>This project</strong> — Immediate when <code>ack()</code> called</td>
+<td>None (offset committed immediately)</td>
+<td>Critical apps, guaranteed processing</td>
+</tr>
+<tr>
+<td><code>RECORD</code></td>
+<td>After each message processed</td>
+<td>May lose batches on crash</td>
+<td>Batch processing</td>
+</tr>
+<tr>
+<td><code>BATCH</code></td>
+<td>After all polled messages processed</td>
+<td>Lag spike on rebalance</td>
+<td>High-throughput apps</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project (MANUAL_IMMEDIATE):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">factory</span><span class="p">.</span><span class="na">getContainerProperties</span><span class="p">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="p">.</span><span class="na">setAckMode</span><span class="p">(</span><span class="n">ContainerProperties</span><span class="p">.</span><span class="na">AckMode</span><span class="p">.</span><span class="na">MANUAL_IMMEDIATE</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;manual-ack-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="nd">@Payload</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="n">processingService</span><span class="p">.</span><span class="na">processEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// Might throw</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">        </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">  </span><span class="c1">// ← Only commit if successful</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="c1">// Don&#39;t call ack() → offset not committed → message re-read on restart</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Semantics:</strong>
+- <strong>At-most-once</strong>: Commit offset immediately (risk: process, crash, offset committed → message lost)
+- <strong>At-least-once</strong>: ✅ Commit offset after processing (risk: process, crash, message re-processed on restart)
+- <strong>Exactly-once</strong>: At-least-once + idempotent processing (application logic must be idempotent)</p>
+<hr />
+<h2 id="8-what-is-enable_auto_commit_config">8. 🟡 What is ENABLE_AUTO_COMMIT_CONFIG?</h2>
+<p><strong>Q:</strong> What does <code>ENABLE_AUTO_COMMIT_CONFIG</code> do? Should you enable it?</p>
+<p><strong>Answer:</strong></p>
+<p><strong><code>ENABLE_AUTO_COMMIT_CONFIG</code></strong> controls whether Spring <strong>automatically commits offsets</strong> at regular intervals.</p>
+<p><strong>Enabled (default):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">ENABLE_AUTO_COMMIT_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_COMMIT_INTERVAL_MS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Every 5 seconds, Kafka commits the offset of the <strong>last received message</strong>, even if processing isn't done. Risk: message lost if it crashes between receive and commit.</p>
+<p><strong>Disabled (this project):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">ENABLE_AUTO_COMMIT_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Offsets are <strong>never auto-committed</strong>. You must call <code>ack.acknowledge()</code> manually. More control, less magic.</p>
+<p><strong>Rule of thumb:</strong>
+- <strong>Critical apps</strong> (financial, health, fraud): Disable auto-commit + use MANUAL_IMMEDIATE
+- <strong>Non-critical apps</strong> (analytics, logging): Enable auto-commit (simpler)</p>
+<hr />
+<h2 id="9-what-is-auto_offset_reset_config">9. 🟡 What is AUTO_OFFSET_RESET_CONFIG?</h2>
+<p><strong>Q:</strong> What does <code>AUTO_OFFSET_RESET_CONFIG</code> do?</p>
+<p><strong>Answer:</strong></p>
+<p><strong><code>AUTO_OFFSET_RESET_CONFIG</code></strong> determines what happens when a consumer has <strong>no committed offset</strong> (first run or offset expired).</p>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>earliest</code></td>
+<td>Start from offset 0 (read all messages from partition start)</td>
+</tr>
+<tr>
+<td><code>latest</code></td>
+<td>Start from latest offset (skip old messages)</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>Throw error (fail fast)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_OFFSET_RESET_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;latest&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Scenario:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Consumer group &quot;manual-ack-group&quot; starts for the first time.
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Partition 0 has messages at offsets 0–999.
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Latest offset = 999.
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>With AUTO_OFFSET_RESET_CONFIG = &quot;latest&quot;:
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  → Consumer starts reading from offset 1000 (next message only)
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  → Old messages are skipped
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>With AUTO_OFFSET_RESET_CONFIG = &quot;earliest&quot;:
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>  → Consumer starts reading from offset 0
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>  → All old messages are replayed
+</code></pre></div></p>
+<p><strong>Common patterns:</strong>
+- New service (don't need history): <code>latest</code>
+- Critical service (replay all history): <code>earliest</code>
+- Audit logs (must not skip): <code>earliest</code></p>
+<hr />
+<h2 id="10-what-is-defaulterrorhandler">10. 🔴 What is DefaultErrorHandler?</h2>
+<p><strong>Q:</strong> How does DefaultErrorHandler work? When should you use it?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>DefaultErrorHandler</strong> is Spring's configurable error handler for consumers. It:
+- <strong>Retries</strong> failed messages with configurable backoff
+- <strong>Publishes</strong> failed messages to a Dead-Letter Topic (DLT)
+- <strong>Logs</strong> errors for debugging</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">DefaultErrorHandler</span><span class="w"> </span><span class="nf">errorHandler</span><span class="p">(</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">        </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">DeadLetterPublishingRecoverer</span><span class="w"> </span><span class="n">recoverer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DeadLetterPublishingRecoverer</span><span class="p">(</span><span class="n">kafkaTemplate</span><span class="p">,</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">            </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">kafka</span><span class="p">.</span><span class="na">common</span><span class="p">.</span><span class="na">TopicPartition</span><span class="p">(</span><span class="n">dltTopic</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="w"> </span><span class="n">backOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="n">backOff</span><span class="p">.</span><span class="na">setInitialInterval</span><span class="p">(</span><span class="mi">1000L</span><span class="p">);</span><span class="w">      </span><span class="c1">// 1 second</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">    </span><span class="n">backOff</span><span class="p">.</span><span class="na">setMultiplier</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span><span class="w">             </span><span class="c1">// 2x each retry</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultErrorHandler</span><span class="p">(</span><span class="n">recoverer</span><span class="p">,</span><span class="w"> </span><span class="n">backOff</span><span class="p">);</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Backoff pattern:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Retry 1: Wait 1 second, retry
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Retry 2: Wait 2 seconds, retry
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Retry 3: Wait 4 seconds, retry
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>After 3 retries: Publish to DLT
+</code></pre></div></p>
+<p><strong>How it works:</strong>
+1. <code>@KafkaListener</code> throws exception
+2. ErrorHandler catches it
+3. Waits (backoff), then container re-invokes the listener with the same message
+4. After max retries, <code>DeadLetterPublishingRecoverer</code> sends message to DLT topic</p>
+<hr />
+<h2 id="11-what-is-deadletterpublishingrecoverer">11. 🔴 What is DeadLetterPublishingRecoverer?</h2>
+<p><strong>Q:</strong> What does DeadLetterPublishingRecoverer do?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>DeadLetterPublishingRecoverer</strong> is a <strong>recovery strategy</strong> that publishes failed messages to a <strong>Dead-Letter Topic (DLT)</strong>.</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">DeadLetterPublishingRecoverer</span><span class="w"> </span><span class="n">recoverer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">DeadLetterPublishingRecoverer</span><span class="p">(</span><span class="n">kafkaTemplate</span><span class="p">,</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">        </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">kafka</span><span class="p">.</span><span class="na">common</span><span class="p">.</span><span class="na">TopicPartition</span><span class="p">(</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">            </span><span class="n">dltTopic</span><span class="p">,</span><span class="w">  </span><span class="c1">// &quot;events-topic.DLT&quot;</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">            </span><span class="mi">0</span><span class="p">));</span><span class="w">       </span><span class="c1">// Send to partition 0</span>
+</code></pre></div>
+<p><strong>Flow:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Original Topic: events-topic
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>  ↓
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>@KafkaListener
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>  ↓
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>processingService.processEvent(event)  → throws exception
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>  ↓
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>DefaultErrorHandler catches + retries 3x
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>  ↓
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>After retries exhausted:
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>  ↓
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>DeadLetterPublishingRecoverer.sendToDlt()
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>  ↓
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>DLT Topic: events-topic.DLT
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>  ↓
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>DeadLetterConsumer reads from DLT
+</code></pre></div></p>
+<p><strong>DLT headers added by Spring:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>dlt-original-topic: events-topic
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>dlt-original-partition: 0
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>dlt-original-offset: 1234
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>dlt-exception-message: java.lang.RuntimeException: Validation failed
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>dlt-exception-fqcn: java.lang.RuntimeException
+</code></pre></div></p>
+<p><strong>Consumed in DeadLetterConsumer:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.dlt}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dlt-consumer-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consumeDlt</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="nd">@Headers</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">headers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">originalTopic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">headers</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;dlt-original-topic&quot;</span><span class="p">);</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">originalOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">headers</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;dlt-original-offset&quot;</span><span class="p">);</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;DLT message from topic={}, offset={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">originalTopic</span><span class="p">,</span><span class="w"> </span><span class="n">originalOffset</span><span class="p">);</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="c1">// Alert/delete/retry logic</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="12-what-is-exponentialbackoffwithmaxretries">12. 🔴 What is ExponentialBackOffWithMaxRetries?</h2>
+<p><strong>Q:</strong> Explain exponential backoff and why it's better than immediate retry.</p>
+<p><strong>Answer:</strong></p>
+<p><strong>ExponentialBackOffWithMaxRetries</strong> increases the <strong>wait time between retries</strong> to avoid overwhelming a struggling service.</p>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">ExponentialBackOffWithMaxRetries</span><span class="w"> </span><span class="n">backOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w">  </span><span class="c1">// Max 3 retries</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setInitialInterval</span><span class="p">(</span><span class="mi">1000L</span><span class="p">);</span><span class="w">             </span><span class="c1">// Start at 1 second</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">backOff</span><span class="p">.</span><span class="na">setMultiplier</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span><span class="w">                    </span><span class="c1">// Double each time</span>
+</code></pre></div></p>
+<p><strong>Retry timeline:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Attempt 1: fails immediately
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>  ↓ Wait 1 second
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>Attempt 2: fails again
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>  ↓ Wait 2 seconds (1 * 2)
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>Attempt 3: fails again
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>  ↓ Wait 4 seconds (2 * 2)
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>Attempt 4: fails again
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>  ↓ No more retries → DLT
+</code></pre></div></p>
+<p><strong>Why exponential backoff?</strong></p>
+<p><strong>Immediate retry (bad):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Request fails → Retry immediately → Fails → Retry → Fails → Retry
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>Service is still struggling, hammered with retries → Makes it worse
+</code></pre></div></p>
+<p><strong>Exponential backoff (good):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Request fails → Wait 1s → Retry → Fails → Wait 2s → Retry → Fails → Wait 4s
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Gives service time to recover (e.g., connection timeout, DB slowness)
+</code></pre></div></p>
+<p><strong>Common patterns:</strong>
+- <strong>API timeouts</strong>: 1s, 2s, 4s, 8s (4 retries)
+- <strong>Database contention</strong>: 100ms, 200ms, 400ms (3 retries) — faster
+- <strong>External service flakiness</strong>: 5s, 10s, 20s (3 retries) — slower</p>
+<hr />
+<h2 id="13-what-is-kafkaavroserializer">13. 🔴 What is KafkaAvroSerializer?</h2>
+<p><strong>Q:</strong> What does KafkaAvroSerializer do? How is it different from JsonSerializer?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>KafkaAvroSerializer</strong> serializes objects as <strong>Avro binary format</strong> and <strong>validates against Schema Registry</strong>.</p>
+<p><strong>Differences from JSON:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>JSON Serializer</th>
+<th>Avro Serializer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Format</td>
+<td>Text (readable)</td>
+<td>Binary (compact)</td>
+</tr>
+<tr>
+<td>Schema validation</td>
+<td>None</td>
+<td>Requires Schema Registry</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Larger</td>
+<td>Smaller (2–5x compression)</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Slower</td>
+<td>Faster</td>
+</tr>
+<tr>
+<td>Breaking changes</td>
+<td>Not detected</td>
+<td>Detected (compatibility modes)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ProducerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">SpecificRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">avroProducerFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">VALUE_SERIALIZER_CLASS_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">        </span><span class="n">KafkaAvroSerializer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">AbstractKafkaSchemaSerDeConfig</span><span class="p">.</span><span class="na">SCHEMA_REGISTRY_URL_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">        </span><span class="n">schemaRegistryUrl</span><span class="p">);</span><span class="w">  </span><span class="c1">// http://localhost:8081</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultKafkaProducerFactory</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">);</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>On first send:</strong>
+1. Producer creates an <code>AvroEvent</code> object
+2. KafkaAvroSerializer contacts <strong>Schema Registry</strong>
+3. Registry checks if <code>avro-events-topic-value</code> schema exists
+4. If not, <strong>registers</strong> the schema
+5. Validates <code>AvroEvent</code> against the schema
+6. Serializes to Avro binary bytes
+7. Sends to Kafka</p>
+<p><strong>If validation fails:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>SerializationException: Error registering Avro schema
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>→ Message is REJECTED → Never reaches Kafka
+</code></pre></div></p>
+<hr />
+<h2 id="14-what-is-kafkaavrodeserializer">14. 🔴 What is KafkaAvroDeserializer?</h2>
+<p><strong>Q:</strong> How does KafkaAvroDeserializer work on the consumer side?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>KafkaAvroDeserializer</strong> deserializes <strong>Avro binary bytes</strong> and <strong>validates against Schema Registry</strong>.</p>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConsumerFactory</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">SpecificRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">avroConsumerFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">VALUE_DESERIALIZER_CLASS_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">        </span><span class="n">KafkaAvroDeserializer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">AbstractKafkaSchemaSerDeConfig</span><span class="p">.</span><span class="na">SCHEMA_REGISTRY_URL_CONFIG</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">        </span><span class="n">schemaRegistryUrl</span><span class="p">);</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">    </span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">KafkaAvroDeserializerConfig</span><span class="p">.</span><span class="na">SPECIFIC_AVRO_READER_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultKafkaConsumerFactory</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">);</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>On consume:</strong>
+1. Consumer receives Avro binary bytes from Kafka
+2. KafkaAvroDeserializer contacts <strong>Schema Registry</strong>
+3. Fetches the <strong>writer schema</strong> (schema used to write the data)
+4. Validates bytes against writer schema
+5. Deserializes to <code>AvroEvent</code> object
+6. Hands to <code>@KafkaListener</code> method</p>
+<p><strong>Schema Registry ensures:</strong>
+- Producer and consumer schemas are <strong>compatible</strong>
+- Old consumers can read messages written by new producers (backward compatibility)
+- New consumers can read messages written by old producers (forward compatibility)</p>
+<hr />
+<h2 id="15-what-is-the-difference-between-producer-throughput-and-durability">15. 🔴 What is the Difference Between Producer Throughput and Durability?</h2>
+<p><strong>Q:</strong> How do you balance throughput vs durability in Kafka producers?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>Throughput</strong> = messages sent per second
+<strong>Durability</strong> = guarantee that messages aren't lost</p>
+<p><strong>Producer <code>acks</code> config controls this tradeoff:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Config</th>
+<th>Behavior</th>
+<th>Throughput</th>
+<th>Durability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acks=0</code></td>
+<td>Fire &amp; forget (no ack)</td>
+<td>🚀 Fastest</td>
+<td>❌ None (message may be lost)</td>
+</tr>
+<tr>
+<td><code>acks=1</code></td>
+<td>Leader acks</td>
+<td>⚡ Fast</td>
+<td>⚠️ Data loss if leader dies</td>
+</tr>
+<tr>
+<td><code>acks=all</code></td>
+<td>All ISRs ack</td>
+<td>🐌 Slowest</td>
+<td>✅ No loss (if min.insync.replicas≥2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">// Low durability, high throughput</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">ACKS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// Returns immediately, no ack</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="c1">// High durability, low throughput</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">ACKS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">);</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;min.insync.replicas&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// Waits for 2 replicas, then returns</span>
+</code></pre></div>
+<p><strong>Recommendation for this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">ACKS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Durability-first</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">RETRIES_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">   </span><span class="c1">// Retry on transient failures</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ProducerConfig</span><span class="p">.</span><span class="na">COMPRESSION_TYPE_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;snappy&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Compress for throughput</span>
+</code></pre></div></p>
+<p><strong>Typical production settings:</strong>
+- <strong>Financial transactions</strong>: <code>acks=all</code> (no message loss)
+- <strong>Analytics</strong>: <code>acks=1</code> (lose &lt;0.1% is acceptable)
+- <strong>Logs</strong>: <code>acks=0</code> (maximum throughput, loss acceptable)</p>
+<hr />
+<h2 id="summary-table">Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KafkaTemplate</strong></td>
+<td>Send messages to Kafka</td>
+</tr>
+<tr>
+<td><strong>@KafkaListener</strong></td>
+<td>Consume messages from Kafka</td>
+</tr>
+<tr>
+<td><strong>ProducerFactory</strong></td>
+<td>Create/configure KafkaProducer</td>
+</tr>
+<tr>
+<td><strong>ConsumerFactory</strong></td>
+<td>Create/configure KafkaConsumer</td>
+</tr>
+<tr>
+<td><strong>ConcurrentKafkaListenerContainerFactory</strong></td>
+<td>Create listener containers (polling threads)</td>
+</tr>
+<tr>
+<td><strong>AckMode</strong></td>
+<td>Control when offsets are committed</td>
+</tr>
+<tr>
+<td><strong>DefaultErrorHandler</strong></td>
+<td>Retry logic + DLT</td>
+</tr>
+<tr>
+<td><strong>DeadLetterPublishingRecoverer</strong></td>
+<td>Publish failed messages to DLT</td>
+</tr>
+<tr>
+<td><strong>ExponentialBackOffWithMaxRetries</strong></td>
+<td>Increase wait time between retries</td>
+</tr>
+<tr>
+<td><strong>KafkaAvroSerializer</strong></td>
+<td>Serialize to Avro + validate via Schema Registry</td>
+</tr>
+<tr>
+<td><strong>KafkaAvroDeserializer</strong></td>
+<td>Deserialize from Avro + validate via Schema Registry</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><strong>Lab 02–07</strong>: Implement these patterns hands-on</li>
+<li><strong>Error Handling Q&amp;A</strong>: <a href="../03-error-handling-qa/">03 · Error Handling &amp; Schema</a></li>
+<li><strong>Theory Deep Dive</strong>: <a href="../../theory/02-spring-kafka-setup/">Theory 02 · Spring Kafka Setup</a></li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

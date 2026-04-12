@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A practical, hands-on guide to Apache Kafka for Spring Boot / microservices developers. Theory → Labs → Interview Prep, all grounded in a real working project.">
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Apache Kafka Learning</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="theory/" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="theory/01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="theory/02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="theory/03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="theory/04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="theory/05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="theory/06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="theory/07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="setup/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#apache-kafka-learning-spring-microservices-edition" class="nav-link">Apache Kafka Learning — Spring Microservices Edition</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#whats-covered-in-this-project" class="nav-link">What's Covered in This Project</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#quick-start-3-commands" class="nav-link">Quick Start (3 commands)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#architecture-at-a-glance" class="nav-link">Architecture at a Glance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="apache-kafka-learning-spring-microservices-edition">Apache Kafka Learning — Spring Microservices Edition</h1>
+<div class="admonition tip">
+<p class="admonition-title">What is this?</p>
+<p>A <strong>progressive, hands-on learning guide</strong> to Apache Kafka, built around a real Spring Boot project that demonstrates every major Kafka pattern you'll encounter in production microservices.</p>
+</div>
+<h2 id="whats-covered-in-this-project">What's Covered in This Project</h2>
+<p>The Spring Boot application in this repository demonstrates:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Concept</th>
+<th style="text-align: left;">Spring Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">JSON event publishing</td>
+<td style="text-align: left;"><code>EventProducer</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Manual-acknowledge consumer</td>
+<td style="text-align: left;"><code>ManualAckConsumer</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Dead Letter Topic + offset deletion</td>
+<td style="text-align: left;"><code>DeadLetterConsumer</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Exponential backoff retry</td>
+<td style="text-align: left;"><code>KafkaConfig.errorHandler()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Avro schema + Schema Registry</td>
+<td style="text-align: left;"><code>AvroEventProducer</code> / <code>AvroEventConsumer</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Multiple consumer groups</td>
+<td style="text-align: left;"><code>manual-ack-group</code>, <code>dlt-consumer-group</code>, <code>avro-consumer-group</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Custom exception taxonomy</td>
+<td style="text-align: left;"><code>CustomErrorHandler</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">REST-driven produce/consume</td>
+<td style="text-align: left;"><code>KafkaController</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="quick-start-3-commands">Quick Start (3 commands)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. Start infrastructure</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. Start the Spring Boot app</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>./mvnw<span class="w"> </span>spring-boot:run
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 3. Send your first event</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_CREATED&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<p>Open <strong>Kafka-UI</strong> at <a href="http://localhost:8090">http://localhost:8090</a> to see the message arrive in real time.</p>
+<hr />
+<h2 id="architecture-at-a-glance">Architecture at a Glance</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>graph TD
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    RC[REST Client] --&gt; KC[KafkaController]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    KC --&gt; EP[EventProducer]
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    KC --&gt; AEP[AvroEventProducer]
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    EP --&gt;|JSON| ET[events-topic&lt;br/&gt;3 partitions]
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    AEP --&gt;|Avro binary| AET[avro-events-topic&lt;br/&gt;3 partitions]
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    AEP &lt;--&gt;|schema validate| SR[Schema Registry :8081]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    ET --&gt; MAC[ManualAckConsumer&lt;br/&gt;manual-ack-group]
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    AET --&gt; AEC[AvroEventConsumer&lt;br/&gt;avro-consumer-group]
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    MAC --&gt;|error after retries| DLT[events-topic.DLT&lt;br/&gt;1 partition]
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    DLT --&gt; DLC[DeadLetterConsumer&lt;br/&gt;dlt-consumer-group]
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    KUI[Kafka-UI :8090] -.-&gt;|monitor| ET
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    KUI -.-&gt;|monitor| AET
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    KUI -.-&gt;|monitor| DLT
+</code></pre></div></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="js/mermaid-init.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-04-12 10:18:41.470330+00:00
+-->

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/theory/05-error-handling-and-dlt/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>05 · Error Handling & DLT - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../04-consumer-groups-and-offsets/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../06-avro-and-schema-registry/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#05-error-handling-dead-letter-topics" class="nav-link">05 · Error Handling &amp; Dead Letter Topics</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#why-error-handling-in-kafka-is-different" class="nav-link">Why Error Handling in Kafka is Different</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#defaulterrorhandler" class="nav-link">DefaultErrorHandler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#exception-taxonomy" class="nav-link">Exception Taxonomy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deadletterpublishingrecoverer" class="nav-link">DeadLetterPublishingRecoverer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deadletterconsumer" class="nav-link">DeadLetterConsumer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#full-dlt-flow-end-to-end" class="nav-link">Full DLT Flow End-to-End</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-takeaways" class="nav-link">Key Takeaways</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#up-next" class="nav-link">Up Next</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="05-error-handling-dead-letter-topics">05 · Error Handling &amp; Dead Letter Topics</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Learning Objectives</p>
+<ul>
+<li>Understand <code>DefaultErrorHandler</code> with exponential backoff</li>
+<li>Explain how <code>DeadLetterPublishingRecoverer</code> routes failed messages to DLT</li>
+<li>Walk through the DLT consumer pattern including offset deletion</li>
+<li>Classify errors as transient, permanent, or validation</li>
+</ul>
+</div>
+<hr />
+<h2 id="why-error-handling-in-kafka-is-different">Why Error Handling in Kafka is Different</h2>
+<p>In REST/HTTP, a failed request returns a 4xx/5xx and the caller retries. In Kafka:</p>
+<ol>
+<li>The consumer receives a batch of messages and <strong>must advance its offset</strong> or it will keep re-consuming the same messages</li>
+<li>A "poison pill" (a message that always fails) can <strong>block an entire partition</strong> forever if not handled</li>
+<li>There is no caller to return an error to — the consumer must decide what to do</li>
+</ol>
+<p>The solution is a <strong>Dead Letter Topic (DLT)</strong> + <strong>retry with backoff</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    M[Message received] --&gt; P[Process]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    P --&gt;|success| A[ack.acknowledge&lt;br/&gt;✅ done]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    P --&gt;|transient error| R{Retry count?}
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    R --&gt;|&lt; max retries| W[Wait exponential backoff&lt;br/&gt;retry]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    W --&gt; P
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    R --&gt;|= max retries| D[DeadLetterPublishingRecoverer&lt;br/&gt;→ events-topic.DLT]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    D --&gt; A2[ack.acknowledge&lt;br/&gt;main topic offset advanced]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    P --&gt;|permanent error| D
+</code></pre></div>
+<hr />
+<h2 id="defaulterrorhandler">DefaultErrorHandler</h2>
+<p><code>DefaultErrorHandler</code> is Spring Kafka's built-in error handler. It:</p>
+<ol>
+<li>Catches exceptions from listener methods</li>
+<li>Applies a <strong>backoff policy</strong> between retries</li>
+<li>After max retries, invokes a <strong>recoverer</strong> (e.g. send to DLT)</li>
+</ol>
+<div class="highlight"><span class="filename">KafkaConfig.java — error handler</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">DefaultErrorHandler</span><span class="w"> </span><span class="nf">errorHandler</span><span class="p">(</span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// 1. Where to send messages that exhaust retries</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">DeadLetterPublishingRecoverer</span><span class="w"> </span><span class="n">recoverer</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">DeadLetterPublishingRecoverer</span><span class="p">(</span><span class="n">kafkaTemplate</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">                    </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TopicPartition</span><span class="p">(</span><span class="n">dltTopic</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1">// 2. Retry policy: 3 retries with 1s→2s→4s backoff</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="w"> </span><span class="n">backOff</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ExponentialBackOffWithMaxRetries</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// (2)!</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">backOff</span><span class="p">.</span><span class="na">setInitialInterval</span><span class="p">(</span><span class="mi">1000L</span><span class="p">);</span><span class="w">                 </span><span class="c1">// (3)!</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="n">backOff</span><span class="p">.</span><span class="na">setMultiplier</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span><span class="w">                        </span><span class="c1">// (4)!</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultErrorHandler</span><span class="p">(</span><span class="n">recoverer</span><span class="p">,</span><span class="w"> </span><span class="n">backOff</span><span class="p">);</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>All DLT messages go to partition 0 of <code>events-topic.DLT</code> (1-partition topic, so this is always valid).</li>
+<li>Maximum of 3 retries before giving up.</li>
+<li>Wait 1 second before the first retry.</li>
+<li>Each subsequent retry doubles the wait: 1s → 2s → 4s.</li>
+</ol>
+<h3 id="retry-timeline">Retry Timeline</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Attempt 1: message consumed, exception thrown, wait 1000ms
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Attempt 2: retry, exception thrown, wait 2000ms
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Attempt 3: retry, exception thrown, wait 4000ms
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Attempt 4: retry, exception thrown → MAX RETRIES EXCEEDED → send to DLT
+</code></pre></div>
+<p>Total time to DLT: ~7 seconds for a transient error.</p>
+<hr />
+<h2 id="exception-taxonomy">Exception Taxonomy</h2>
+<div class="highlight"><span class="filename">handler/CustomErrorHandler.java</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomErrorHandler</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">ErrorClassification</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">TRANSIENT</span><span class="p">,</span><span class="w">       </span><span class="c1">// temporary failure, worth retrying</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">PERMANENT</span><span class="p">,</span><span class="w">       </span><span class="c1">// won&#39;t succeed on retry (bug, bad data)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">DESERIALIZATION</span><span class="p">,</span><span class="w"> </span><span class="c1">// can&#39;t even parse the message bytes</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="n">VALIDATION</span><span class="w">       </span><span class="c1">// message parsed but fails business rules</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TransientException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="nf">TransientException</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">super</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ValidationException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="nf">ValidationException</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">super</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="how-eventprocessingservice-uses-this">How <code>EventProcessingService</code> Uses This</h3>
+<div class="highlight"><span class="filename">service/EventProcessingService.java</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processEvent</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">isSimulateError</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">getErrorType</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TRANSIENT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransientException</span><span class="p">(</span><span class="s">&quot;Transient error&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// (1)!</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">PERMANENT</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Permanent error&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// (2)!</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">VALIDATION</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ValidationException</span><span class="p">(</span><span class="s">&quot;Validation error&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// (3)!</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="c1">// Happy path: business logic here</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><code>TransientException</code> — retried 3 times with backoff, then to DLT.</li>
+<li><code>RuntimeException</code> — also retried 3 times (all unchecked exceptions are), then to DLT.</li>
+<li><code>ValidationException</code> — retried 3 times, then to DLT (same path, different root cause).</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Non-retryable exceptions</p>
+<p>You can configure <code>DefaultErrorHandler</code> to NOT retry certain exception types:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">errorHandler</span><span class="p">.</span><span class="na">addNotRetryableExceptions</span><span class="p">(</span><span class="n">ValidationException</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+This sends them <strong>directly</strong> to DLT without retries — useful for validation/business rule failures.</p>
+</div>
+<hr />
+<h2 id="deadletterpublishingrecoverer">DeadLetterPublishingRecoverer</h2>
+<p>When <code>DefaultErrorHandler</code> exhausts retries, <code>DeadLetterPublishingRecoverer</code>:</p>
+<ol>
+<li><strong>Copies</strong> the original message to the DLT topic</li>
+<li>Adds <strong>diagnostic headers</strong> to the DLT record:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>DLT Header</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kafka_dlt-exception-message</code></td>
+<td>Exception message string</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-exception-fqcn</code></td>
+<td>Fully-qualified exception class name</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-topic</code></td>
+<td>Original topic name</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-partition</code></td>
+<td>Original partition number</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-offset</code></td>
+<td>Original offset</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-timestamp</code></td>
+<td>Original message timestamp</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="deadletterconsumer">DeadLetterConsumer</h2>
+<div class="highlight"><span class="filename">consumer/DeadLetterConsumer.java</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.dlt}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dlt-consumer-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consumeDeadLetter</span><span class="p">(</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="n">ConsumerRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumerRecord</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nd">@Header</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">DLT_EXCEPTION_MESSAGE</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">exceptionMessage</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nd">@Header</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">DLT_ORIGINAL_TOPIC</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">originalTopic</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;=== DEAD LETTER RECEIVED ===&quot;</span><span class="p">);</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Original Topic: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">originalTopic</span><span class="p">);</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Error: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">exceptionMessage</span><span class="p">);</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Payload: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumerRecord</span><span class="p">.</span><span class="na">value</span><span class="p">());</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">      </span><span class="c1">// (1)!</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="n">deleteMessage</span><span class="p">(</span><span class="n">consumerRecord</span><span class="p">);</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>Commit the DLT offset first — don't block the partition.</li>
+<li>Then asynchronously delete the physical record from the DLT.</li>
+</ol>
+<h3 id="physical-record-deletion">Physical Record Deletion</h3>
+<div class="highlight"><span class="filename">DeadLetterConsumer.deleteMessage()</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteMessage</span><span class="p">(</span><span class="n">ConsumerRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumerRecord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">TopicPartition</span><span class="w"> </span><span class="n">tp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TopicPartition</span><span class="p">(</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">            </span><span class="n">consumerRecord</span><span class="p">.</span><span class="na">topic</span><span class="p">(),</span><span class="w"> </span><span class="n">consumerRecord</span><span class="p">.</span><span class="na">partition</span><span class="p">());</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">beforeOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">consumerRecord</span><span class="p">.</span><span class="na">offset</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">TopicPartition</span><span class="p">,</span><span class="w"> </span><span class="n">RecordsToDelete</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toDelete</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">            </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="w"> </span><span class="n">RecordsToDelete</span><span class="p">.</span><span class="na">beforeOffset</span><span class="p">(</span><span class="n">beforeOffset</span><span class="p">));</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">AdminClient</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdminClient</span><span class="p">.</span><span class="na">create</span><span class="p">(</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">            </span><span class="n">kafkaAdmin</span><span class="p">.</span><span class="na">getConfigurationProperties</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="n">admin</span><span class="p">.</span><span class="na">deleteRecords</span><span class="p">(</span><span class="n">toDelete</span><span class="p">).</span><span class="na">all</span><span class="p">().</span><span class="na">get</span><span class="p">();</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><code>deleteRecords(beforeOffset=N)</code> removes all records with <code>offset &lt; N</code>, i.e., exactly this message.</li>
+<li><code>AdminClient</code> is used to truncate the low-watermark of the partition — this is a <strong>log truncation</strong>, not a message delete flag.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">deleteRecords is irreversible</p>
+<p>Once truncated, those offsets are gone permanently. Only use this for messages you've fully handled and logged.</p>
+</div>
+<hr />
+<h2 id="full-dlt-flow-end-to-end">Full DLT Flow End-to-End</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sequenceDiagram
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    participant P as EventProducer
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    participant ET as events-topic
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    participant MAC as ManualAckConsumer
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    participant EH as DefaultErrorHandler
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    participant DLT as events-topic.DLT
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    participant DLC as DeadLetterConsumer
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    P-&gt;&gt;ET: send(ORDER_FAILED, simulateError=true, TRANSIENT)
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    ET--&gt;&gt;MAC: poll → offset=42
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    MAC-&gt;&gt;MAC: processEvent() → TransientException ❌
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    MAC-&gt;&gt;EH: throw TransientException
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    EH-&gt;&gt;EH: wait 1s, retry...
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    EH-&gt;&gt;MAC: retry attempt 2 → TransientException ❌
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    EH-&gt;&gt;EH: wait 2s, retry...
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    EH-&gt;&gt;MAC: retry attempt 3 → TransientException ❌
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    EH-&gt;&gt;EH: wait 4s, retry...
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    EH-&gt;&gt;MAC: retry attempt 4 → TransientException ❌
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    Note over EH: Max retries exhausted
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    EH-&gt;&gt;DLT: DeadLetterPublishingRecoverer.recover()&lt;br/&gt;copy message + add headers
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    EH-&gt;&gt;ET: commit offset 43 (advance past poison pill)
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    DLT--&gt;&gt;DLC: poll → DLT message
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>    DLC-&gt;&gt;DLC: log error details
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>    DLC-&gt;&gt;DLC: ack.acknowledge()
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>    DLC-&gt;&gt;DLC: AdminClient.deleteRecords()
+</code></pre></div>
+<hr />
+<h2 id="key-takeaways">Key Takeaways</h2>
+<div class="admonition success">
+<p class="admonition-title">What to remember</p>
+<ol>
+<li><code>DefaultErrorHandler</code> = retries + DLT routing in one bean</li>
+<li>Exponential backoff: 1s → 2s → 4s before DLT (after 3 retries = 4 total attempts)</li>
+<li><code>DeadLetterPublishingRecoverer</code> copies message to DLT with diagnostic headers</li>
+<li>After DLT routing, the <strong>main topic offset advances</strong> — no stuck partition</li>
+<li><code>DeadLetterConsumer</code> logs the failure, acks, then physically deletes the DLT record</li>
+<li>Use <code>addNotRetryableExceptions()</code> for validation errors you don't want to retry</li>
+</ol>
+</div>
+<hr />
+<h2 id="up-next">Up Next</h2>
+<p>➡️ <a href="../06-avro-and-schema-registry/">06 · Avro &amp; Schema Registry</a></p>
+<p><strong>Hands-on now?</strong> → <a href="../../labs/lab-04-error-handling/">Lab 04 · Error Handling &amp; Retry</a> + <a href="../../labs/lab-05-dead-letter-topic/">Lab 05 · Dead Letter Topic</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

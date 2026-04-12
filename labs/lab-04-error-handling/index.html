@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/labs/lab-04-error-handling/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Lab 04 · Error Handling & Retry - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../theory/" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lab-03-consumer-groups/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../lab-05-dead-letter-topic/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#lab-04-error-handling-exponential-backoff-retry" class="nav-link">Lab 04 · Error Handling &amp; Exponential Backoff Retry</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-1-baseline-normal-event-no-error" class="nav-link">Step 1 — Baseline: Normal Event (No Error)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-2-trigger-a-transient-error" class="nav-link">Step 2 — Trigger a Transient Error</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-3-verify-message-landed-in-dlt" class="nav-link">Step 3 — Verify Message Landed in DLT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-4-trigger-a-permanent-error" class="nav-link">Step 4 — Trigger a Permanent Error</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-5-trigger-a-validation-error" class="nav-link">Step 5 — Trigger a Validation Error</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-6-interleave-normal-and-error-events" class="nav-link">Step 6 — Interleave Normal and Error Events</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-7-observe-dlt-headers-in-kafka-ui" class="nav-link">Step 7 — Observe DLT Headers in Kafka-UI</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-8-count-main-topic-vs-dlt" class="nav-link">Step 8 — Count Main Topic vs DLT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#understanding-the-error-flow" class="nav-link">Understanding the Error Flow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-you-learned" class="nav-link">What You Learned</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lab-04-error-handling-exponential-backoff-retry">Lab 04 · Error Handling &amp; Exponential Backoff Retry</h1>
+<div class="admonition info">
+<p class="admonition-title">Theory</p>
+<p>Read <a href="../../theory/05-error-handling-and-dlt/">05 · Error Handling &amp; DLT</a> first.</p>
+</div>
+<p><strong>Goal:</strong> Trigger transient, permanent, and validation errors. Observe the exponential backoff retry sequence in logs and confirm failed messages land in the DLT.</p>
+<p><strong>Time:</strong> ~25 minutes</p>
+<hr />
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Lab 01–02 complete — Docker running, Spring Boot app running</li>
+<li>Kafka-UI open at <a href="http://localhost:8090">http://localhost:8090</a></li>
+</ul>
+<hr />
+<h2 id="step-1-baseline-normal-event-no-error">Step 1 — Baseline: Normal Event (No Error)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_CREATED&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<p>App log:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Received - Partition: X, Offset: Y, EventId: ...
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Processing event: ... - Type: ORDER_CREATED
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Acknowledged offset: Y
+</code></pre></div></p>
+<h3 id="checkpoint-1-normal-processing-one-log-line-per-stage-no-retries">✅ Checkpoint 1: Normal processing — one log line per stage, no retries</h3>
+<hr />
+<h2 id="step-2-trigger-a-transient-error">Step 2 — Trigger a Transient Error</h2>
+<p>A <code>TRANSIENT</code> error simulates a temporary failure (e.g., downstream service timeout):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_FAILED&amp;simulateError=true&amp;errorType=TRANSIENT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<p>Watch the app logs carefully. You should see:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Received - Partition: X, Offset: Y, EventId: ...
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Processing event: ... - Type: ORDER_FAILED
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Transient error, will retry. Offset: Y         ← attempt 1
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                                                (wait 1 second)
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Received - Partition: X, Offset: Y, EventId:  ← retry attempt 2
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Transient error, will retry. Offset: Y
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                                (wait 2 seconds)
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Received - Partition: X, Offset: Y, EventId:  ← retry attempt 3
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>Transient error, will retry. Offset: Y
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                                                (wait 4 seconds)
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>Received - Partition: X, Offset: Y, EventId:  ← retry attempt 4
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>Transient error, will retry. Offset: Y
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                                                ← MAX RETRIES EXCEEDED → DLT
+</code></pre></div>
+<p>Total time: approximately <strong>7 seconds</strong> (1+2+4).</p>
+<h3 id="checkpoint-2-exactly-4-attempts-in-logs-3-retries-original-with-increasing-delay">✅ Checkpoint 2: Exactly 4 attempts in logs (3 retries + original), with increasing delay</h3>
+<hr />
+<h2 id="step-3-verify-message-landed-in-dlt">Step 3 — Verify Message Landed in DLT</h2>
+<p>After the retries exhaust, check the DLT consumer log:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>=== DEAD LETTER RECEIVED ===
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Original Topic: events-topic
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Error: Transient error
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Payload: {eventId: ..., eventType: ORDER_FAILED, ...}
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Deleted DLT message at topic=events-topic.DLT partition=0 offset=0
+</code></pre></div>
+<p>Also check Kafka-UI:
+1. <strong>Topics → events-topic.DLT → Messages</strong>
+2. The failed message appears briefly, then disappears (deleted by <code>DeadLetterConsumer.deleteMessage()</code>)</p>
+<h3 id="checkpoint-3-dlt-consumer-logged-the-failed-message-with-original-topic-and-error">✅ Checkpoint 3: DLT consumer logged the failed message with original topic and error</h3>
+<hr />
+<h2 id="step-4-trigger-a-permanent-error">Step 4 — Trigger a Permanent Error</h2>
+<p>A <code>PERMANENT</code> error simulates a non-recoverable bug or corrupted data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_CORRUPT&amp;simulateError=true&amp;errorType=PERMANENT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<p>Observe the logs — same retry pattern (3 retries), same DLT outcome.</p>
+<div class="admonition note">
+<p class="admonition-title">Same retry count, different exception</p>
+<p>Both <code>TRANSIENT</code> (TransientException) and <code>PERMANENT</code> (RuntimeException) go through the same retry policy by default. The distinction is conceptual — in a production system you'd configure permanent errors to skip retries:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">errorHandler</span><span class="p">.</span><span class="na">addNotRetryableExceptions</span><span class="p">(</span><span class="n">PermanentException</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div></p>
+</div>
+<hr />
+<h2 id="step-5-trigger-a-validation-error">Step 5 — Trigger a Validation Error</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_INVALID&amp;simulateError=true&amp;errorType=VALIDATION&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<p>Same retry pattern and DLT routing.</p>
+<hr />
+<h2 id="step-6-interleave-normal-and-error-events">Step 6 — Interleave Normal and Error Events</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Send multiple events — mix of success and failure</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_CREATED&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_FAILED&amp;simulateError=true&amp;errorType=TRANSIENT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/kafka/events/test?eventType=ORDER_CREATED&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</code></pre></div>
+<h3 id="checkpoint-4-normal-events-processed-immediately-error-events-retry-in-parallel">✅ Checkpoint 4: Normal events processed immediately; error events retry in parallel</h3>
+<p>Observe that while the TRANSIENT event is retrying (waiting 1s, 2s, 4s), the normal events on <strong>other partitions</strong> continue processing — only the failing partition is blocked.</p>
+<hr />
+<h2 id="step-7-observe-dlt-headers-in-kafka-ui">Step 7 — Observe DLT Headers in Kafka-UI</h2>
+<ol>
+<li>Trigger another TRANSIENT error but <strong>before the DLT consumer deletes it</strong>, open Kafka-UI</li>
+<li><strong>Topics → events-topic.DLT → Messages</strong></li>
+<li>Click on the DLT message to expand it</li>
+<li>Look at the <strong>Headers</strong> tab — you'll see:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kafka_dlt-exception-message</code></td>
+<td><code>Transient error</code></td>
+</tr>
+<tr>
+<td><code>kafka_dlt-exception-fqcn</code></td>
+<td><code>com.demo.kafka.handler.CustomErrorHandler$TransientException</code></td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-topic</code></td>
+<td><code>events-topic</code></td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-partition</code></td>
+<td><code>1</code> (or whichever)</td>
+</tr>
+<tr>
+<td><code>kafka_dlt-original-offset</code></td>
+<td>The original message offset</td>
+</tr>
+</tbody>
+</table>
+<h3 id="checkpoint-5-dlt-headers-are-visible-in-kafka-ui-before-deletion">✅ Checkpoint 5: DLT headers are visible in Kafka-UI before deletion</h3>
+<hr />
+<h2 id="step-8-count-main-topic-vs-dlt">Step 8 — Count Main Topic vs DLT</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Current offsets for events-topic (total messages written)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>kafka<span class="w"> </span>kafka-run-class<span class="w"> </span>kafka.tools.GetOffsetShell<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>--topic<span class="w"> </span>events-topic
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Current offsets for DLT</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>kafka<span class="w"> </span>kafka-run-class<span class="w"> </span>kafka.tools.GetOffsetShell<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span>--topic<span class="w"> </span>events-topic.DLT
+</code></pre></div>
+<hr />
+<h2 id="understanding-the-error-flow">Understanding the Error Flow</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>errorType=TRANSIENT → TransientException thrown in ManualAckConsumer
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    → caught by DefaultErrorHandler
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        → wait 1s → retry → TransientException again
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        → wait 2s → retry → TransientException again
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        → wait 4s → retry → TransientException again
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        → MAX RETRIES (3) EXCEEDED
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        → DeadLetterPublishingRecoverer.recover()
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            → write to events-topic.DLT with headers
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        → commit main topic offset (partition unblocked)
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            → DeadLetterConsumer.consumeDeadLetter()
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>                → log error
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>                → ack.acknowledge()
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>                → AdminClient.deleteRecords()
+</code></pre></div>
+<hr />
+<h2 id="what-you-learned">What You Learned</h2>
+<ul>
+<li>✅ Observed the 4-attempt retry sequence (1 original + 3 retries) with exponential backoff</li>
+<li>✅ Confirmed failed messages route to DLT after retries are exhausted</li>
+<li>✅ Verified the main topic offset advances after DLT routing (partition unblocked)</li>
+<li>✅ Inspected DLT diagnostic headers in Kafka-UI</li>
+<li>✅ Understood the difference between TRANSIENT, PERMANENT, and VALIDATION error types</li>
+</ul>
+<p><strong>Next:</strong> <a href="../lab-05-dead-letter-topic/">Lab 05 · Dead Letter Topic Deep Dive</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

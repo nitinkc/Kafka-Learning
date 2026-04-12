@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/theory/04-consumer-groups-and-offsets/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>04 · Consumer Groups & Offsets - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../03-producers-and-consumers/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../05-error-handling-and-dlt/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#04-consumer-groups-offsets" class="nav-link">04 · Consumer Groups &amp; Offsets</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#consumer-groups-recap" class="nav-link">Consumer Groups Recap</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-three-groups-in-this-project" class="nav-link">The Three Groups in This Project</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#autooffsetreset" class="nav-link">auto.offset.reset</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#offset-commit-strategies" class="nav-link">Offset Commit Strategies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#rebalancing" class="nav-link">Rebalancing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lag-the-key-observability-metric" class="nav-link">Lag — the Key Observability Metric</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#offset-storage" class="nav-link">Offset Storage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-takeaways" class="nav-link">Key Takeaways</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#up-next" class="nav-link">Up Next</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="04-consumer-groups-offsets">04 · Consumer Groups &amp; Offsets</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Learning Objectives</p>
+<ul>
+<li>Explain consumer group mechanics and partition assignment</li>
+<li>Describe what happens during a group rebalance</li>
+<li>Understand <code>auto.offset.reset</code> options</li>
+<li>Compare offset commit strategies and their delivery guarantees</li>
+</ul>
+</div>
+<hr />
+<h2 id="consumer-groups-recap">Consumer Groups Recap</h2>
+<p>A <strong>consumer group</strong> allows multiple application instances to cooperate in consuming a topic:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>events-topic (3 partitions)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>┌─────────────┬─────────────┬─────────────┐
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│ Partition 0 │ Partition 1 │ Partition 2 │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└──────┬──────┴──────┬──────┴──────┬──────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>       │             │             │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   Instance A    Instance B    Instance C
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   (manual-ack-group)
+</code></pre></div>
+<p>Rules:
+- Each partition → <strong>at most one</strong> consumer in the group
+- Excess consumers are <strong>idle</strong> (standby for failover)
+- Each group tracks its own committed offsets <strong>independently</strong>
+- Adding a new consumer group = full replay from the <code>auto.offset.reset</code> point</p>
+<hr />
+<h2 id="the-three-groups-in-this-project">The Three Groups in This Project</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>graph TD
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    ET[events-topic&lt;br/&gt;3 partitions] --&gt;|manual-ack-group| MAC[ManualAckConsumer]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    DLT[events-topic.DLT&lt;br/&gt;1 partition] --&gt;|dlt-consumer-group| DLC[DeadLetterConsumer]
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    AET[avro-events-topic&lt;br/&gt;3 partitions] --&gt;|avro-consumer-group| AEC[AvroEventConsumer]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Topic</th>
+<th>Purpose</th>
+<th>Ack Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manual-ack-group</code></td>
+<td><code>events-topic</code></td>
+<td>Process business events</td>
+<td><code>MANUAL_IMMEDIATE</code></td>
+</tr>
+<tr>
+<td><code>dlt-consumer-group</code></td>
+<td><code>events-topic.DLT</code></td>
+<td>Log &amp; delete failed events</td>
+<td><code>MANUAL_IMMEDIATE</code></td>
+</tr>
+<tr>
+<td><code>avro-consumer-group</code></td>
+<td><code>avro-events-topic</code></td>
+<td>Process Avro-encoded events</td>
+<td><code>MANUAL_IMMEDIATE</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="autooffsetreset">auto.offset.reset</h2>
+<p>When a consumer group has <strong>no committed offset</strong> (new group, or offsets expired), Kafka uses <code>auto.offset.reset</code> to decide where to start reading:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behaviour</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>latest</code> ✅ (this project)</td>
+<td>Start from messages produced <strong>after</strong> the consumer first connects</td>
+<td>Production — skip historical backlog</td>
+</tr>
+<tr>
+<td><code>earliest</code></td>
+<td>Start from the <strong>beginning</strong> of each partition</td>
+<td>Replay, initial data load, testing</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>Throw <code>NoOffsetForPartitionException</code></td>
+<td>Fail-fast in strict environments</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><span class="filename">KafkaConfig.java</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_OFFSET_RESET_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;latest&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title"><code>latest</code> vs <code>earliest</code> — the gotcha</p>
+<p>With <code>latest</code>, if your consumer group is created <em>after</em> messages were already published, those earlier messages are <strong>invisible</strong> to this group. Use <code>earliest</code> during development to see all messages from the start.</p>
+</div>
+<hr />
+<h2 id="offset-commit-strategies">Offset Commit Strategies</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>graph LR
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    A[Message received&lt;br/&gt;offset=42] --&gt; B{Process}
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    B --&gt;|success| C[ack.acknowledge&lt;br/&gt;commit offset 43]
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    B --&gt;|fail| D[throw exception&lt;br/&gt;offset stays at 42&lt;br/&gt;→ retry]
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    D --&gt;|after max retries| E[DeadLetterPublishingRecoverer&lt;br/&gt;→ DLT, commit offset 43]
+</code></pre></div>
+<h3 id="enableautocommit-false-this-project">enable.auto.commit = false (this project)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">ENABLE_AUTO_COMMIT_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+<p>Spring controls the commit. Offset is committed <strong>only</strong> when <code>ack.acknowledge()</code> is called (with <code>MANUAL_IMMEDIATE</code>). This gives:</p>
+<ul>
+<li><strong>At-least-once delivery</strong> — a message may be re-processed if the app crashes after processing but before commit</li>
+<li><strong>No silent data loss</strong> — offset never advances past unprocessed messages</li>
+</ul>
+<h3 id="enableautocommit-true-not-used-here">enable.auto.commit = true (not used here)</h3>
+<p>Kafka commits offsets at a fixed interval (<code>auto.commit.interval.ms</code>). Simpler but:</p>
+<ul>
+<li>Messages may be committed <strong>before</strong> they're successfully processed → data loss on crash</li>
+<li>Messages may be re-processed if the app crashes between a commit interval → duplicates possible</li>
+</ul>
+<hr />
+<h2 id="rebalancing">Rebalancing</h2>
+<p>A <strong>rebalance</strong> occurs when the group membership changes:</p>
+<ul>
+<li>A new consumer joins (scale-out)</li>
+<li>A consumer leaves or crashes</li>
+<li>Topics/partitions are added</li>
+</ul>
+<p>During a rebalance:
+1. All consumers in the group <strong>stop consuming</strong> (pause)
+2. The <strong>Group Coordinator</strong> (a Kafka broker) reassigns partitions
+3. Consumers <strong>resume</strong> from their committed offsets on the newly assigned partitions</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sequenceDiagram
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    participant GC as Group Coordinator
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    participant C1 as Consumer 1
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    participant C2 as Consumer 2 (new)
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    Note over C1: consuming P0, P1, P2
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    C2-&gt;&gt;GC: JoinGroup request
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    GC-&gt;&gt;C1: Stop consuming (rebalance triggered)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    GC-&gt;&gt;GC: Assign: C1→P0,P1 / C2→P2
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    GC-&gt;&gt;C1: Resume on P0, P1
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    GC-&gt;&gt;C2: Start on P2 from committed offset
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Rebalance in practice</p>
+<p>In this project you can trigger a rebalance by starting a <strong>second instance</strong> of the Spring Boot app. Watch Kafka-UI → <code>manual-ack-group</code> → the partition assignments change in real time.</p>
+</div>
+<hr />
+<h2 id="lag-the-key-observability-metric">Lag — the Key Observability Metric</h2>
+<p><strong>Consumer lag</strong> = (latest offset on partition) − (consumer's committed offset)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Partition 0: latest=100, committed=98 → lag=2
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Partition 1: latest=50,  committed=50 → lag=0
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Partition 2: latest=75,  committed=70 → lag=5
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Total lag for manual-ack-group = 7
+</code></pre></div>
+<p>Zero lag = consumer is fully caught up.
+High/growing lag = consumer is falling behind — scale out or investigate.</p>
+<p>View in <strong>Kafka-UI → Consumers → <code>manual-ack-group</code></strong>.</p>
+<hr />
+<h2 id="offset-storage">Offset Storage</h2>
+<p>Before Kafka 0.9, offsets were stored in ZooKeeper. Now they're stored in an internal Kafka topic:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>__consumer_offsets (50 partitions)
+</code></pre></div>
+<p>This topic records <code>(group_id, topic, partition) → committed_offset</code> for every consumer group. You don't need to interact with it directly — <code>ack.acknowledge()</code> writes to it transparently.</p>
+<hr />
+<h2 id="key-takeaways">Key Takeaways</h2>
+<div class="admonition success">
+<p class="admonition-title">What to remember</p>
+<ol>
+<li>Consumer groups = horizontal scaling + fault tolerance for consumers</li>
+<li>Each partition is owned by <strong>one consumer</strong> per group at any time</li>
+<li><code>auto.offset.reset=latest</code> = skip history; <code>earliest</code> = replay from beginning</li>
+<li><code>ENABLE_AUTO_COMMIT=false</code> + <code>MANUAL_IMMEDIATE</code> = you control exactly when progress is recorded</li>
+<li>Consumer lag is your primary observability signal — monitor it in Kafka-UI</li>
+</ol>
+</div>
+<hr />
+<h2 id="up-next">Up Next</h2>
+<p>➡️ <a href="../05-error-handling-and-dlt/">05 · Error Handling &amp; DLT</a></p>
+<p><strong>Hands-on now?</strong> → <a href="../../labs/lab-03-consumer-groups/">Lab 03 · Consumer Groups</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/interview-guide/01-core-concepts-qa/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Core Concepts Q&A - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../theory/" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/01-kafka-fundamentals/" class="dropdown-item">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../theory/07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../02-spring-kafka-qa/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#interview-qa-core-kafka-concepts" class="nav-link">Interview Q&amp;A · Core Kafka Concepts</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-what-is-a-kafka-broker" class="nav-link">1. 🟢 What is a Kafka Broker?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-what-is-a-topic" class="nav-link">2. 🟢 What is a Topic?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-what-is-a-partition" class="nav-link">3. 🟢 What is a Partition?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-what-is-an-offset" class="nav-link">4. 🟢 What is an Offset?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-how-are-messages-assigned-to-partitions" class="nav-link">5. 🟡 How are Messages Assigned to Partitions?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#6-what-is-a-consumer-group" class="nav-link">6. 🟡 What is a Consumer Group?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#7-what-happens-during-rebalancing" class="nav-link">7. 🟡 What Happens During Rebalancing?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#8-what-is-offset-commit" class="nav-link">8. 🟡 What is Offset Commit?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#9-what-is-consumer-lag" class="nav-link">9. 🟡 What is Consumer Lag?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#10-what-is-autooffsetreset" class="nav-link">10. 🟡 What is auto.offset.reset?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#11-what-is-replication" class="nav-link">11. 🔴 What is Replication?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-what-is-zookeepers-role" class="nav-link">12. 🔴 What is ZooKeeper's Role?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-what-is-message-retention" class="nav-link">13. 🔴 What is Message Retention?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-what-is-the-difference-between-mininsyncreplicas-and-acks" class="nav-link">14. 🔴 What is the Difference Between min.insync.replicas and acks?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#15-what-happens-when-a-consumer-falls-behind" class="nav-link">15. 🔴 What Happens When a Consumer Falls Behind?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary-table" class="nav-link">Summary Table</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="interview-qa-core-kafka-concepts">Interview Q&amp;A · Core Kafka Concepts</h1>
+<p>Master these 15 core Kafka concepts that appear in <strong>every</strong> Kafka interview.</p>
+<hr />
+<h2 id="1-what-is-a-kafka-broker">1. 🟢 What is a Kafka Broker?</h2>
+<p><strong>Q:</strong> Explain what a Kafka broker is and its role in a cluster.</p>
+<p><strong>Answer:</strong></p>
+<p>A <strong>Kafka broker</strong> is a single server process that:
+- <strong>Stores</strong> partitions (copies of topic data) on disk
+- <strong>Receives messages</strong> from producers via <code>send()</code>
+- <strong>Serves messages</strong> to consumers via <code>fetch()</code>
+- <strong>Replicates</strong> data to other brokers for fault tolerance
+- <strong>Participates</strong> in a cluster under ZooKeeper/controller coordination</p>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">kafka</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-kafka:7.5.0</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;9092:9092&quot;</span><span class="w">  </span><span class="c1"># ← Broker listening for producers/consumers</span>
+</code></pre></div></p>
+<p>A single broker handles all topics in the cluster. A production cluster has <strong>3+ brokers</strong> for high availability.</p>
+<hr />
+<h2 id="2-what-is-a-topic">2. 🟢 What is a Topic?</h2>
+<p><strong>Q:</strong> What is a Kafka topic? How does it differ from a message queue?</p>
+<p><strong>Answer:</strong></p>
+<p>A <strong>topic</strong> is a <strong>logical channel</strong> for related events. Unlike message queues (which delete messages after consumption), Kafka topics are <strong>durable append-only logs</strong>.</p>
+<p><strong>Key differences:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Kafka Topic</th>
+<th>Message Queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deletion</td>
+<td>After retention period (days/bytes)</td>
+<td>After consumption</td>
+</tr>
+<tr>
+<td>Multiple consumers</td>
+<td>✅ Yes (same topic)</td>
+<td>❌ Only one queue drains messages</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>✅ Reset offset to replay</td>
+<td>❌ Lost forever</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Event streaming, audit logs</td>
+<td>Work distribution</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Bean</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">NewTopic</span><span class="w"> </span><span class="nf">mainTopic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">TopicBuilder</span><span class="p">.</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;events-topic&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="p">.</span><span class="na">partitions</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="p">.</span><span class="na">replicas</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>Three topics exist:
+- <code>events-topic</code> — main event stream
+- <code>events-topic.DLT</code> — dead-letter (failed events)
+- <code>avro-events-topic</code> — Avro-serialized events</p>
+<hr />
+<h2 id="3-what-is-a-partition">3. 🟢 What is a Partition?</h2>
+<p><strong>Q:</strong> Why does Kafka partition topics? What is a partition?</p>
+<p><strong>Answer:</strong></p>
+<p>A <strong>partition</strong> is a <strong>physical shard</strong> of a topic — an ordered, immutable log stored on broker disk.</p>
+<p><strong>Partitions enable:</strong></p>
+<ol>
+<li><strong>Parallelism</strong> — Multiple consumers read different partitions simultaneously</li>
+<li><strong>Ordering guarantee</strong> — Messages within a partition are ordered by offset</li>
+<li><strong>Throughput</strong> — Data distributed across multiple disks / CPUs</li>
+</ol>
+<p><strong>Example:</strong> <code>events-topic</code> has <strong>3 partitions</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Partition 0: [Message 0] [Message 1] [Message 2] [Message 3] ...
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Partition 1: [Message 0] [Message 1] [Message 2] ...
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Partition 2: [Message 0] [Message 1] ...
+</code></pre></div>
+<p>When a producer sends a message with key <code>"order-123"</code>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Hash(&quot;order-123&quot;) % 3 = 0  → Goes to Partition 0 (deterministic)
+</code></pre></div></p>
+<p>All messages with the same key go to the same partition → <strong>order guaranteed</strong>.</p>
+<hr />
+<h2 id="4-what-is-an-offset">4. 🟢 What is an Offset?</h2>
+<p><strong>Q:</strong> What is an offset and why is it important?</p>
+<p><strong>Answer:</strong></p>
+<p>An <strong>offset</strong> is a <strong>unique sequence number</strong> assigned to each message within a partition.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Partition 0:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  Offset 0: {eventId: &quot;evt-001&quot;, ...}
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  Offset 1: {eventId: &quot;evt-002&quot;, ...}
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  Offset 2: {eventId: &quot;evt-003&quot;, ...}
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  ↑ Next message written = Offset 3
+</code></pre></div>
+<p><strong>Offsets enable:</strong></p>
+<ol>
+<li><strong>Positioning</strong> — "Give me messages from offset 100 onwards"</li>
+<li><strong>Replay</strong> — Consumer can reset offset to re-read events</li>
+<li><strong>At-least-once semantics</strong> — If consumer crashes before committing offset 100, it restarts at 100</li>
+</ol>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;manual-ack-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="nd">@Payload</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">                    </span><span class="nd">@Header</span><span class="p">(</span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">OFFSET</span><span class="p">)</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">                    </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Offset: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span><span class="w">  </span><span class="c1">// ← Sequence number within partition</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">processingService</span><span class="p">.</span><span class="na">processEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">  </span><span class="c1">// ← Commit this offset to __consumer_offsets</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="5-how-are-messages-assigned-to-partitions">5. 🟡 How are Messages Assigned to Partitions?</h2>
+<p><strong>Q:</strong> How does Kafka decide which partition a message goes to?</p>
+<p><strong>Answer:</strong></p>
+<h3 id="with-a-key-deterministic">With a Key (Deterministic)</h3>
+<p>If the message has a <strong>key</strong>, Kafka uses a <strong>hash function</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>partition = Hash(key) % numPartitions
+</code></pre></div>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;order-123&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// ← key: &quot;order-123&quot;</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Hash(&quot;order-123&quot;) % 3 = 0  → Partition 0
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Hash(&quot;order-456&quot;) % 3 = 2  → Partition 2
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Hash(&quot;order-789&quot;) % 3 = 1  → Partition 1
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Hash(&quot;order-123&quot;) % 3 = 0  → Partition 0 (again — same key, same partition)
+</code></pre></div>
+<p>All messages with the same key go to <strong>the same partition</strong>, ensuring <strong>order</strong>.</p>
+<h3 id="without-a-key-round-robin">Without a Key (Round-Robin)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// ← no key</span>
+</code></pre></div>
+<p>Kafka round-robins across partitions:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Message 1 → Partition 0
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Message 2 → Partition 1
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Message 3 → Partition 2
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Message 4 → Partition 0
+</code></pre></div></p>
+<p><strong>No ordering guarantee</strong> across messages.</p>
+<hr />
+<h2 id="6-what-is-a-consumer-group">6. 🟡 What is a Consumer Group?</h2>
+<p><strong>Q:</strong> Explain consumer groups and how Kafka balances load.</p>
+<p><strong>Answer:</strong></p>
+<p>A <strong>consumer group</strong> is a <strong>set of consumers reading from the same topic together</strong>. Each partition is assigned to at most <strong>one consumer</strong> in the group.</p>
+<p><strong>How load balancing works:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Topic: events-topic (3 partitions)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Consumer Group: manual-ack-group (2 consumers)
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Consumer 1: reads Partition 0, Partition 1
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Consumer 2: reads Partition 2
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>If Consumer 3 joins:
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>Consumer 1: reads Partition 0
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>Consumer 2: reads Partition 1
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>Consumer 3: reads Partition 2
+</code></pre></div>
+<p><strong>In this project:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// ManualAckConsumer</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">               </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;manual-ack-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1">// DeadLetterConsumer</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.dlt}&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">               </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dlt-consumer-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Each group maintains <strong>independent offsets</strong> per partition, so multiple groups can independently read the same topic.</p>
+<hr />
+<h2 id="7-what-happens-during-rebalancing">7. 🟡 What Happens During Rebalancing?</h2>
+<p><strong>Q:</strong> What is rebalancing? When does it occur?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>Rebalancing</strong> is the process of redistributing partitions among consumers when the group composition changes.</p>
+<p><strong>When it happens:</strong>
+- Consumer joins the group
+- Consumer leaves the group (crash or shutdown)
+- Consumer times out (not sending heartbeats)</p>
+<p><strong>What happens:</strong>
+1. A <strong>Stop-the-World</strong> event: <strong>all consumers pause</strong>, commit their offsets
+2. ZooKeeper/controller detects the change
+3. Partitions are <strong>reassigned</strong> to consumers
+4. Consumers <strong>resume</strong> reading from their new partitions</p>
+<p><strong>Impact:</strong>
+- Latency spike: All processing pauses for 1–30 seconds
+- <strong>No message loss</strong> (offsets committed before rebalance)</p>
+<p><strong>How to minimize rebalancing:</strong>
+- Set long <code>session.timeout.ms</code> (default: 10 seconds)
+- Implement graceful shutdown (commit final offsets before exit)</p>
+<hr />
+<h2 id="8-what-is-offset-commit">8. 🟡 What is Offset Commit?</h2>
+<p><strong>Q:</strong> What does it mean to commit an offset? What happens if you don't?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>Committing an offset</strong> = recording "we've successfully processed messages up to this offset in this partition".</p>
+<p>Kafka stores committed offsets in the <code>__consumer_offsets</code> internal topic.</p>
+<p><strong>Automatic Commit (Default):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">ENABLE_AUTO_COMMIT_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_COMMIT_INTERVAL_MS_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Every 5 seconds, Spring auto-commits the offset of the last received message (even if processing isn't done yet). Risk: message lost if it crashes between receive and commit.</p>
+<p><strong>Manual Commit (This Project):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">factory</span><span class="p">.</span><span class="na">getContainerProperties</span><span class="p">()</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="p">.</span><span class="na">setAckMode</span><span class="p">(</span><span class="n">ContainerProperties</span><span class="p">.</span><span class="na">AckMode</span><span class="p">.</span><span class="na">MANUAL_IMMEDIATE</span><span class="p">);</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">processingService</span><span class="p">.</span><span class="na">processEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">  </span><span class="c1">// ← Only commit after successful processing</span>
+</code></pre></div>
+<p><strong>If you don't commit:</strong>
+- On restart, consumer reads from the <strong>last committed offset</strong>
+- If you never commit, consumer always reads from the beginning (or latest, depending on <code>auto.offset.reset</code>)</p>
+<hr />
+<h2 id="9-what-is-consumer-lag">9. 🟡 What is Consumer Lag?</h2>
+<p><strong>Q:</strong> What is consumer lag and why does it matter?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>Consumer lag</strong> = the difference between the <strong>latest offset in the partition</strong> and the <strong>consumer's committed offset</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Partition 0:
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>  Latest offset: 1000
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  Consumer committed offset: 995
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>  Lag: 5 messages
+</code></pre></div>
+<p><strong>Why it matters:</strong>
+- <strong>Lag = 0</strong> → Consumer is caught up, processing in real-time
+- <strong>Lag &gt; 0</strong> → Consumer is behind, backlog exists
+- <strong>Lag growing</strong> → Consumer can't keep up, may need more instances</p>
+<p><strong>In this project:</strong>
+Use Kafka-UI to monitor lag:
+1. Open http://localhost:8090
+2. Go to <strong>Consumers</strong> → <code>manual-ack-group</code>
+3. See lag per partition (should be 0 if no backlog)</p>
+<hr />
+<h2 id="10-what-is-autooffsetreset">10. 🟡 What is <code>auto.offset.reset</code>?</h2>
+<p><strong>Q:</strong> What does the <code>auto.offset.reset</code> config do?</p>
+<p><strong>Answer:</strong></p>
+<p><code>auto.offset.reset</code> determines <strong>what the consumer does if there's no committed offset</strong> (first run or offset expired).</p>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>earliest</code></td>
+<td>Start from offset 0 (read all messages)</td>
+</tr>
+<tr>
+<td><code>latest</code></td>
+<td>Start from the latest offset (skip old messages)</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>Throw error (fail fast)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">ConsumerConfig</span><span class="p">.</span><span class="na">AUTO_OFFSET_RESET_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;latest&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Example:</strong>
+- Consumer <code>manual-ack-group</code> starts for the first time
+- No committed offset exists
+- Consumer starts reading from the <strong>latest</strong> offset (new messages only)
+- It skips all past events</p>
+<p><strong>Common pattern:</strong> Use <code>latest</code> for new services (don't replay history), <code>earliest</code> for critical services (replay all events).</p>
+<hr />
+<h2 id="11-what-is-replication">11. 🔴 What is Replication?</h2>
+<p><strong>Q:</strong> How does Kafka achieve fault tolerance via replication?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>Replication</strong> = each partition is copied to multiple brokers. A partition has:
+- <strong>Leader</strong>: Primary replica, receives all writes/reads
+- <strong>In-Sync Replicas (ISR)</strong>: Replicas fully caught up with the leader</p>
+<p><strong>Example: 3 brokers, replication factor = 2</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Partition 0:
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  Leader: Broker 1
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  ISR: [Broker 1, Broker 2]  ← Broker 3 is not replicated
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>Partition 1:
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>  Leader: Broker 2
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>  ISR: [Broker 2, Broker 3]
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>Partition 2:
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>  Leader: Broker 3
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  ISR: [Broker 3, Broker 1]
+</code></pre></div>
+<p><strong>Fault tolerance:</strong>
+- Broker 1 dies → Broker 2 becomes leader for Partition 0 (leader election)
+- Messages written to Broker 1 are already on Broker 2 (no data loss)</p>
+<p><strong>In this project:</strong> replication factor = <strong>1</strong> (single copy per partition). Not production-safe, but fine for learning.</p>
+<hr />
+<h2 id="12-what-is-zookeepers-role">12. 🔴 What is ZooKeeper's Role?</h2>
+<p><strong>Q:</strong> What does ZooKeeper do in a Kafka cluster?</p>
+<p><strong>Answer:</strong></p>
+<p><strong>ZooKeeper</strong> is a <strong>coordination service</strong> that Kafka relies on for:</p>
+<ol>
+<li><strong>Broker registration</strong> — Track which brokers are alive</li>
+<li><strong>Leader election</strong> — If partition leader dies, elect new leader from ISRs</li>
+<li><strong>Configuration storage</strong> — Store topic configs, ACLs, quotas</li>
+<li><strong>Consumer group coordination</strong> — Store consumer group metadata (pre-3.1) or KRaft (3.1+)</li>
+</ol>
+<p><strong>In this project:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">zookeeper</span><span class="p">:</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-zookeeper:7.5.0</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2181:2181&quot;</span>
+</code></pre></div></p>
+<p>You rarely interact with ZooKeeper directly. Kafka handles it internally.</p>
+<p><strong>Note:</strong> Kafka 3.3+ introduces <strong>KRaft mode</strong>, which replaces ZooKeeper with Kafka's own consensus mechanism.</p>
+<hr />
+<h2 id="13-what-is-message-retention">13. 🔴 What is Message Retention?</h2>
+<p><strong>Q:</strong> How long does Kafka keep messages? How can you control it?</p>
+<p><strong>Answer:</strong></p>
+<p>Kafka retains messages based on <strong>time or size</strong>:</p>
+<p><strong>Time-based Retention:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168  # Keep messages for 7 days</span>
+</code></pre></div></p>
+<p><strong>Size-based Retention:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="na">log.retention.bytes</span><span class="o">=</span><span class="s">1073741824  # Keep until partition exceeds 1 GB</span>
+</code></pre></div></p>
+<p><strong>Whichever limit is reached first, oldest messages are deleted.</strong></p>
+<p><strong>In production:</strong>
+- High-throughput topics: 1–3 days retention (to limit storage)
+- Audit logs: 1–2 years (compliance)
+- DLT: 1 day (don't keep failures forever)</p>
+<p><strong>Impact:</strong>
+- If consumer lag exceeds retention period, consumer can't replay old messages
+- If <code>auto.offset.reset=earliest</code> but messages are deleted, consumer errors out</p>
+<p><strong>Kafka never overwrites a committed offset</strong> — data is always safe once written.</p>
+<hr />
+<h2 id="14-what-is-the-difference-between-mininsyncreplicas-and-acks">14. 🔴 What is the Difference Between <code>min.insync.replicas</code> and <code>acks</code>?</h2>
+<p><strong>Q:</strong> How do <code>acks</code> and <code>min.insync.replicas</code> affect producer durability?</p>
+<p><strong>Answer:</strong></p>
+<p>These configs control <strong>how many brokers must acknowledge</strong> before a producer considers the message "sent".</p>
+<p><strong>Producer <code>acks</code> config:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Durability</th>
+<th>Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>No ack</td>
+<td>Fastest (fire and forget)</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Leader acks</td>
+<td>Fast (leader only)</td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td>All ISRs ack</td>
+<td>Slowest (strongest guarantee)</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>min.insync.replicas</code> (broker config):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="na">min.insync.replicas</span><span class="o">=</span><span class="s">2</span>
+</code></pre></div></p>
+<p>When <code>acks=all</code>, Kafka waits for <strong>at least 2 in-sync replicas</strong> to acknowledge before responding to producer.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Producer sends with acks=all
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>Partition 0: Leader (Broker 1) + ISR [Broker 2]
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>Broker 1 receives message ✓
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>Broker 2 replicates message ✓
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>min.insync.replicas=2 satisfied → Producer gets success ✓
+</code></pre></div></p>
+<p><strong>Production setting:</strong> <code>acks=all</code> + <code>min.insync.replicas=2</code> = <strong>no data loss</strong> (at cost of latency).</p>
+<hr />
+<h2 id="15-what-happens-when-a-consumer-falls-behind">15. 🔴 What Happens When a Consumer Falls Behind?</h2>
+<p><strong>Q:</strong> Describe what happens when a consumer is too slow to keep up with incoming messages. How do you recover?</p>
+<p><strong>Answer:</strong></p>
+<p>When a consumer <strong>cannot keep up</strong>, lag grows exponentially.</p>
+<p><strong>Causes:</strong>
+- Slow processing logic (db calls, API calls, etc.)
+- Hardware bottleneck (CPU, disk, network)
+- Consumer crash + restart (temporary pauses)</p>
+<p><strong>What happens:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Partition 0:
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  Latest offset: 10000
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>  Consumer offset: 5000
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>  Lag: 5000 messages (accumulating)
+</code></pre></div>
+<p><strong>Recovery options:</strong></p>
+<ol>
+<li>
+<p><strong>Add more consumers</strong> (scale horizontally)
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">// Instead of 1 consumer reading all 3 partitions:</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1">// Deploy 3 consumer instances → each reads 1 partition</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Optimize processing</strong> (scale vertically)</p>
+</li>
+<li>Cache database queries</li>
+<li>Use async I/O</li>
+<li>
+<p>Batch processing</p>
+</li>
+<li>
+<p><strong>Increase consumer concurrency</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">factory</span><span class="p">.</span><span class="na">setConcurrency</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// 4 concurrent threads per consumer</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>If messages are old, skip them</strong> (dangerous!)
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Reset consumer group offset to latest (lose history)</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>kafka-consumer-groups<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span>--group<span class="w"> </span>manual-ack-group<span class="w"> </span>--reset-offsets<span class="w"> </span>--to-latest<span class="w"> </span>--execute
+</code></pre></div></p>
+</li>
+</ol>
+<p><strong>Best practice:</strong> Monitor lag in Kafka-UI; set up alerts when lag &gt; threshold.</p>
+<hr />
+<h2 id="summary-table">Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Broker</strong></td>
+<td>Server storing partitions</td>
+</tr>
+<tr>
+<td><strong>Topic</strong></td>
+<td>Named log stream (persistent, replay-able)</td>
+</tr>
+<tr>
+<td><strong>Partition</strong></td>
+<td>Physical shard; enables parallelism &amp; ordering</td>
+</tr>
+<tr>
+<td><strong>Offset</strong></td>
+<td>Message sequence number within partition</td>
+</tr>
+<tr>
+<td><strong>Consumer Group</strong></td>
+<td>Set of consumers load-balancing partitions</td>
+</tr>
+<tr>
+<td><strong>Rebalancing</strong></td>
+<td>Reassigning partitions when group changes</td>
+</tr>
+<tr>
+<td><strong>Offset Commit</strong></td>
+<td>Recording "we've processed up to this offset"</td>
+</tr>
+<tr>
+<td><strong>Consumer Lag</strong></td>
+<td>Latest offset - committed offset</td>
+</tr>
+<tr>
+<td><strong>Replication</strong></td>
+<td>Copying partitions across brokers</td>
+</tr>
+<tr>
+<td><strong>ZooKeeper</strong></td>
+<td>Coordination service (broker registration, leader election)</td>
+</tr>
+<tr>
+<td><strong>Retention</strong></td>
+<td>How long messages are kept</td>
+</tr>
+<tr>
+<td><strong><code>acks</code></strong></td>
+<td>How many replicas must acknowledge before success</td>
+</tr>
+<tr>
+<td><strong><code>min.insync.replicas</code></strong></td>
+<td>Minimum in-sync replicas for durability</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><strong>Lab 01–07</strong>: Implement these concepts hands-on</li>
+<li><strong>Spring Kafka Q&amp;A</strong>: <a href="../02-spring-kafka-qa/">02 · Spring Kafka</a> — How Spring Boot integrates with Kafka</li>
+<li><strong>Theory Deep Dive</strong>: <a href="../../theory/04-consumer-groups-and-offsets/">Theory 04 · Consumer Groups &amp; Offsets</a></li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

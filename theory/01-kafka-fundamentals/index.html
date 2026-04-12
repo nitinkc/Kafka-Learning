@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://nitinkc.github.io/Kafka-Learning/theory/01-kafka-fundamentals/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>01 · Kafka Fundamentals - Apache Kafka Learning</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="https://unpkg.com/mermaid@10/dist/mermaid.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Apache Kafka Learning</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../setup/" class="nav-link">Setup</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Theory</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Theory — Learning Path</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">01 · Kafka Fundamentals</a>
+</li>
+                                    
+<li>
+    <a href="../02-spring-kafka-setup/" class="dropdown-item">02 · Spring Kafka Setup</a>
+</li>
+                                    
+<li>
+    <a href="../03-producers-and-consumers/" class="dropdown-item">03 · Producers & Consumers</a>
+</li>
+                                    
+<li>
+    <a href="../04-consumer-groups-and-offsets/" class="dropdown-item">04 · Consumer Groups & Offsets</a>
+</li>
+                                    
+<li>
+    <a href="../05-error-handling-and-dlt/" class="dropdown-item">05 · Error Handling & DLT</a>
+</li>
+                                    
+<li>
+    <a href="../06-avro-and-schema-registry/" class="dropdown-item">06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../07-advanced-patterns/" class="dropdown-item">07 · Advanced Patterns</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Labs</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../labs/" class="dropdown-item">Labs — Hands-On Practice</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-01-docker-setup/" class="dropdown-item">Lab 01 · Docker Setup</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-02-first-producer-consumer/" class="dropdown-item">Lab 02 · First Producer & Consumer</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-03-consumer-groups/" class="dropdown-item">Lab 03 · Consumer Groups</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-04-error-handling/" class="dropdown-item">Lab 04 · Error Handling & Retry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-05-dead-letter-topic/" class="dropdown-item">Lab 05 · Dead Letter Topic</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-06-avro-schema-registry/" class="dropdown-item">Lab 06 · Avro & Schema Registry</a>
+</li>
+                                    
+<li>
+    <a href="../../labs/lab-07-advanced-scenarios/" class="dropdown-item">Lab 07 · Advanced Scenarios</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Interview Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../interview-guide/" class="dropdown-item">Interview Guide — Kafka for Spring Microservices Developers</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/01-core-concepts-qa/" class="dropdown-item">Core Concepts Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/02-spring-kafka-qa/" class="dropdown-item">Spring Kafka Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/03-error-handling-qa/" class="dropdown-item">Error Handling & Schema Q&A</a>
+</li>
+                                    
+<li>
+    <a href="../../interview-guide/04-scenario-questions/" class="dropdown-item">Scenario & System Design</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/nitinkc/Kafka-Learning" class="nav-link">🔗 GitHub</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../02-spring-kafka-setup/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#01-kafka-fundamentals" class="nav-link">01 · Kafka Fundamentals</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#what-is-apache-kafka" class="nav-link">What is Apache Kafka?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#core-components" class="nav-link">Core Components</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#message-lifecycle" class="nav-link">Message Lifecycle</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#kafka-vs-traditional-queue" class="nav-link">Kafka vs Traditional Queue</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#retention-policy" class="nav-link">Retention Policy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#consumer-groups" class="nav-link">Consumer Groups</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-takeaways" class="nav-link">Key Takeaways</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#up-next" class="nav-link">Up Next</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="01-kafka-fundamentals">01 · Kafka Fundamentals</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Learning Objectives</p>
+<p>After this module you will be able to:</p>
+<ul>
+<li>Explain the core components of a Kafka cluster</li>
+<li>Describe how messages flow from producer to consumer</li>
+<li>Distinguish Kafka's log-based model from traditional message queues</li>
+<li>Explain partitions, offsets, and consumer groups</li>
+</ul>
+</div>
+<hr />
+<h2 id="what-is-apache-kafka">What is Apache Kafka?</h2>
+<p>Apache Kafka is a <strong>distributed commit-log platform</strong> designed for high-throughput, fault-tolerant, real-time data streaming. It can serve as:</p>
+<ul>
+<li>A <strong>message bus</strong> — point-to-point or pub/sub messaging</li>
+<li>An <strong>event streaming platform</strong> — durable ordered event log</li>
+<li>A <strong>data pipeline</strong> — connecting microservices and data systems</li>
+</ul>
+<blockquote>
+<p>Unlike traditional queues (RabbitMQ, ActiveMQ), Kafka messages are <strong>not deleted after consumption</strong>. They are retained for a configurable period, allowing multiple consumers and historical replay.</p>
+</blockquote>
+<hr />
+<h2 id="core-components">Core Components</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    P1[Producer A] --&gt;|write| T[Topic: orders&lt;br/&gt;Partition 0 · Partition 1 · Partition 2]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    P2[Producer B] --&gt;|write| T
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    T --&gt;|read| CG1[Consumer Group A&lt;br/&gt;service-billing]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    T --&gt;|read| CG2[Consumer Group B&lt;br/&gt;service-fulfillment]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    T --&gt;|read| CG3[Consumer Group C&lt;br/&gt;service-analytics]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    T --- B1[Broker 1]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    T --- B2[Broker 2]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    B1 &lt;--&gt; ZK[ZooKeeper]
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    B2 &lt;--&gt; ZK
+</code></pre></div>
+<h3 id="broker">Broker</h3>
+<p>A Kafka <strong>broker</strong> is a server that:</p>
+<ul>
+<li>Receives messages from producers and stores them on disk</li>
+<li>Serves messages to consumers on request</li>
+<li>Participates in a <strong>cluster</strong> alongside other brokers</li>
+</ul>
+<p>In this project, the broker runs in the <code>kafka</code> Docker container and is accessible at:</p>
+<ul>
+<li><code>localhost:9092</code> — from your host machine (Spring Boot app)</li>
+<li><code>kafka:29092</code> — from other Docker containers (Schema Registry, Kafka-UI)</li>
+</ul>
+<h3 id="topic">Topic</h3>
+<p>A <strong>topic</strong> is a named, ordered log of messages. Think of it as a table in a database or a folder of log files.</p>
+<p>This project uses three topics:</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Partitions</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>events-topic</code></td>
+<td>3</td>
+<td>Main JSON event stream</td>
+</tr>
+<tr>
+<td><code>events-topic.DLT</code></td>
+<td>1</td>
+<td>Dead-letter (failed events)</td>
+</tr>
+<tr>
+<td><code>avro-events-topic</code></td>
+<td>3</td>
+<td>Avro schema-validated stream</td>
+</tr>
+</tbody>
+</table>
+<h3 id="partition">Partition</h3>
+<p>Each topic is split into <strong>partitions</strong> — independent ordered sub-logs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>events-topic
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── Partition 0: [msg@0] [msg@1] [msg@5] ...
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── Partition 1: [msg@0] [msg@2] [msg@6] ...
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└── Partition 2: [msg@0] [msg@3] [msg@7] ...
+</code></pre></div>
+<p>Key facts:</p>
+<ul>
+<li>Messages within a partition are <strong>strictly ordered</strong></li>
+<li>A message with the same key <strong>always goes to the same partition</strong> (key hashing)</li>
+<li>Partitions enable <strong>horizontal scalability</strong> — more partitions = more parallelism</li>
+<li>Each partition is assigned to <strong>one consumer</strong> per consumer group at any time</li>
+</ul>
+<h3 id="offset">Offset</h3>
+<p>An <strong>offset</strong> is a unique, monotonically increasing integer identifying a message within a partition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Partition 0: [offset=0 | msg] [offset=1 | msg] [offset=2 | msg] → next write: offset=3
+</code></pre></div>
+<p>Offsets are per-partition and are committed by consumers to track progress.</p>
+<p>In <code>ManualAckConsumer</code>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;${kafka.topics.main}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;manual-ack-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="nd">@Payload</span><span class="w"> </span><span class="n">Event</span><span class="w"> </span><span class="n">event</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nd">@Header</span><span class="p">(</span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">RECEIVED_PARTITION</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">partition</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nd">@Header</span><span class="p">(</span><span class="n">KafkaHeaders</span><span class="p">.</span><span class="na">OFFSET</span><span class="p">)</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w">  </span><span class="c1">// (1)!</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w"> </span><span class="c1">// commits this offset (2)!</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
+</code></pre></div></p>
+<ol>
+<li>The offset is read from the Kafka message header.</li>
+<li><code>ack.acknowledge()</code> tells Kafka: "I've processed this message, advance my committed offset."</li>
+</ol>
+<hr />
+<h2 id="message-lifecycle">Message Lifecycle</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sequenceDiagram
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    participant P as Producer
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    participant K as Kafka Broker
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    participant C as Consumer
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    participant ZK as ZooKeeper
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    P-&gt;&gt;K: send(topic, key, value)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    K--&gt;&gt;P: RecordMetadata (partition, offset)
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    Note over K: Message written to partition log&lt;br/&gt;Replicated to followers (if RF &gt; 1)
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    C-&gt;&gt;K: poll() — &quot;give me messages from my committed offset&quot;
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    K--&gt;&gt;C: ConsumerRecords batch
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    C-&gt;&gt;C: process()
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    C-&gt;&gt;K: commitOffset (partition → offset+1)
+</code></pre></div>
+<hr />
+<h2 id="kafka-vs-traditional-queue">Kafka vs Traditional Queue</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Traditional Queue (RabbitMQ)</th>
+<th>Kafka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage</td>
+<td>In-memory / transient</td>
+<td>Durable disk-based log</td>
+</tr>
+<tr>
+<td>Deletion</td>
+<td>After consumption (ACK)</td>
+<td>Retention policy (time / size)</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>❌ Not possible</td>
+<td>✅ Reset offset to replay</td>
+</tr>
+<tr>
+<td>Multiple consumers</td>
+<td>Competing consumers (one gets it)</td>
+<td>All consumer groups get a copy</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>Per-queue</td>
+<td>Per-partition</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>Moderate</td>
+<td>Very high (millions/sec)</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Task queues, RPC</td>
+<td>Event sourcing, streaming, audit log</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="retention-policy">Retention Policy</h2>
+<p>Messages are retained by time OR size (whichever is reached first):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Keep messages for 7 days (default)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Keep max 1 GB per partition</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="na">log.retention.bytes</span><span class="o">=</span><span class="s">1073741824</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">This project</p>
+<p>The Confluent Docker image uses <strong>default retention</strong> (7 days). Messages accumulate until you run <code>docker compose down -v</code>.</p>
+</div>
+<hr />
+<h2 id="consumer-groups">Consumer Groups</h2>
+<p>A <strong>consumer group</strong> is a logical grouping of consumer instances that together consume a topic:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>events-topic (3 partitions)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>├── Partition 0 ──► Consumer 1 (manual-ack-group)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>├── Partition 1 ──► Consumer 2 (manual-ack-group)
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>└── Partition 2 ──► Consumer 3 (manual-ack-group)
+</code></pre></div>
+<p>Rules:
+- Each partition is consumed by <strong>exactly one</strong> member of a group
+- If consumers &gt; partitions, excess consumers sit idle
+- If consumers &lt; partitions, some consumers handle multiple partitions
+- <strong>Different groups</strong> each get their own independent copy of all messages</p>
+<p>This project has <strong>three consumer groups</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Consumer Class</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manual-ack-group</code></td>
+<td><code>ManualAckConsumer</code></td>
+<td><code>events-topic</code></td>
+</tr>
+<tr>
+<td><code>dlt-consumer-group</code></td>
+<td><code>DeadLetterConsumer</code></td>
+<td><code>events-topic.DLT</code></td>
+</tr>
+<tr>
+<td><code>avro-consumer-group</code></td>
+<td><code>AvroEventConsumer</code></td>
+<td><code>avro-events-topic</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-takeaways">Key Takeaways</h2>
+<div class="admonition success">
+<p class="admonition-title">What to remember</p>
+<ol>
+<li>Kafka is a <strong>distributed, durable, ordered log</strong> — not a queue</li>
+<li>Topics are split into <strong>partitions</strong> for scalability</li>
+<li>Each message has an <strong>offset</strong> (unique position within a partition)</li>
+<li>Consumer groups allow <strong>multiple independent reads</strong> of the same topic</li>
+<li>Messages are <strong>retained</strong> regardless of consumption — replay is possible</li>
+</ol>
+</div>
+<hr />
+<h2 id="up-next">Up Next</h2>
+<p>➡️ <a href="../02-spring-kafka-setup/">02 · Spring Kafka Setup</a> — how to wire Kafka into your Spring Boot application.</p>
+<p><strong>Hands-on now?</strong> → <a href="../../labs/lab-01-docker-setup/">Lab 01 · Docker Setup</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.js"></script>
+        <script src="../../js/mermaid-init.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
