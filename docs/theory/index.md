@@ -11,6 +11,8 @@ Progress through these modules **in order**. Each builds on the previous one.
 | [05](05-error-handling-and-dlt.md) | Error Handling & DLT | `DefaultErrorHandler`, exponential backoff, DLT |
 | [06](06-avro-and-schema-registry.md) | Avro & Schema Registry | `.avsc`, code-gen, `KafkaAvroSerializer`, compatibility |
 | [07](07-advanced-patterns.md) | Advanced Patterns | Multi-factory, idempotent producers, event-driven arch |
+| [08](08-nats-pubsub-and-streaming-landscape.md) | NATS.io, Google Pub/Sub & The Streaming Landscape | NATS Core, JetStream, Google Pub/Sub, platform comparison |
+| [09](09-kafka-streams.md) | Kafka Streams | KStream, KTable, GlobalKTable, windowing, joins, state stores, interactive queries |
 
 !!! tip "Pair with Labs"
     Every theory module has a **corresponding lab** in the [Labs](../labs/index.md) section.

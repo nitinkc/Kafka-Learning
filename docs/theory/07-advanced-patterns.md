@@ -213,7 +213,7 @@ graph TD
 
 ## Congratulations! 🎉
 
-You've completed all 7 theory modules. Head to the **Interview Guide** to test your knowledge, or revisit labs for hands-on reinforcement.
+You've completed the core theory modules. Next, dive into **Module 09: Kafka Streams** for client-side stream processing, or head to the **Interview Guide** to test your knowledge.
 
-➡️ [Interview Guide](../interview-guide/index.md)
+➡️ [09 · Kafka Streams](09-kafka-streams.md) | [Interview Guide](../interview-guide/index.md)
 

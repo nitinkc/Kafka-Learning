@@ -39,6 +39,8 @@ nav:
     - "05 · Error Handling & DLT": theory/05-error-handling-and-dlt.md
     - "06 · Avro & Schema Registry": theory/06-avro-and-schema-registry.md
     - "07 · Advanced Patterns": theory/07-advanced-patterns.md
+    - "08 · NATS.io, Pub/Sub & Streaming Landscape": theory/08-nats-pubsub-and-streaming-landscape.md
+    - "09 · Kafka Streams": theory/09-kafka-streams.md
 
   - Labs:
     - labs/index.md
@@ -49,6 +51,7 @@ nav:
     - "Lab 05 · Dead Letter Topic": labs/lab-05-dead-letter-topic.md
     - "Lab 06 · Avro & Schema Registry": labs/lab-06-avro-schema-registry.md
     - "Lab 07 · Advanced Scenarios": labs/lab-07-advanced-scenarios.md
+    - "Lab 08 · Kafka Streams": labs/lab-08-kafka-streams.md
 
   - Interview Guide:
     - interview-guide/index.md

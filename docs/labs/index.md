@@ -11,6 +11,7 @@ Every lab corresponds to a theory module. Work through them in order for best re
 | [05](lab-05-dead-letter-topic.md) | Dead Letter Topic | [05 · Error Handling & DLT](../theory/05-error-handling-and-dlt.md) | 20 min |
 | [06](lab-06-avro-schema-registry.md) | Avro & Schema Registry | [06 · Avro & Schema Registry](../theory/06-avro-and-schema-registry.md) | 30 min |
 | [07](lab-07-advanced-scenarios.md) | Advanced Scenarios | [07 · Advanced Patterns](../theory/07-advanced-patterns.md) | 30 min |
+| [08](lab-08-kafka-streams.md) | Kafka Streams | [09 · Kafka Streams](../theory/09-kafka-streams.md) | 40 min |
 
 !!! info "Each lab"
     - Lists **prerequisites** (what must be running)
