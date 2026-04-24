@@ -1,4 +1,4 @@
-# 05 · Error Handling & Dead Letter Topics
+# Error Handling & Dead Letter Topics (05)
 
 !!! abstract "Learning Objectives"
     - Understand `DefaultErrorHandler` with exponential backoff
@@ -242,7 +242,7 @@ sequenceDiagram
 
 ## Up Next
 
-➡️ [06 · Avro & Schema Registry](06-avro-and-schema-registry.md)
+➡️ [Avro & Schema Registry (06)](06-avro-and-schema-registry.md)
 
-**Hands-on now?** → [Lab 04 · Error Handling & Retry](../labs/lab-04-error-handling.md) + [Lab 05 · Dead Letter Topic](../labs/lab-05-dead-letter-topic.md)
+**Hands-on now?** → [Error Handling & Exponential Backoff Retry (Lab 04)](../labs/lab-04-error-handling.md) + [Dead Letter Topic Deep Dive (Lab 05)](../labs/lab-05-dead-letter-topic.md)
 

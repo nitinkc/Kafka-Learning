@@ -1,4 +1,4 @@
-# 09 · Kafka Streams
+# Kafka Streams (09)
 
 !!! abstract "Learning Objectives"
     - Understand what Kafka Streams is and how it differs from Kafka Consumer API
@@ -124,8 +124,10 @@ streams.start();
 |--------|---------------|-------|
 | **Processing model** | Event-at-a-time | Micro-batches (default) |
 | **Latency** | Sub-second | Second+ |
+| **Learning curve** | Moderate | Moderate-Steep |
 | **Ecosystem** | Kafka-native | ML, SQL, graph processing |
 | **Scaling** | Auto (partition-aware) | Manual cluster config |
+| **Ops overhead** | Minimal | Cluster management required |
 | **Best for** | Low-latency event streams | Analytics, batched analytics |
 
 ### ksqlDB
@@ -431,7 +433,7 @@ Duration hopSize = Duration.ofSeconds(30);
 
 orders
     .groupByKey()
-    .windowedBy(TimeWindows.ofSizeAndGrace(windowSize, hopSize))
+    .windowedBy(TimeWindows.of(windowSize).advanceBy(hopSize))
     .count()
     .toStream()
     .to("hopping-order-counts");
@@ -739,6 +741,6 @@ public Long getOrderCount(@PathVariable String id) {
 
 ## Next Steps
 
-➡️ [Lab 08 · Kafka Streams](../labs/lab-08-kafka-streams.md) — Build a real-world order enrichment pipeline.
+➡️ [Kafka Streams (Lab 08)](../labs/lab-08-kafka-streams.md) — Build a real-world order enrichment pipeline.
 
 

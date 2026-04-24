@@ -1,4 +1,4 @@
-# 06 · Avro & Schema Registry
+# Avro & Schema Registry (06)
 
 !!! abstract "Learning Objectives"
     - Understand why schema management matters in event-driven systems
@@ -261,7 +261,7 @@ The message **never reaches the Kafka broker** — the exception is thrown in th
 
 ## Up Next
 
-➡️ [07 · Advanced Patterns](07-advanced-patterns.md)
+➡️ [Advanced Patterns (07)](07-advanced-patterns.md)
 
-**Hands-on now?** → [Lab 06 · Avro & Schema Registry](../labs/lab-06-avro-schema-registry.md)
+**Hands-on now?** → [Avro & Schema Registry (Lab 06)](../labs/lab-06-avro-schema-registry.md)
 

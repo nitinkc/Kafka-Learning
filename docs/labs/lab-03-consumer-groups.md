@@ -1,7 +1,7 @@
-# Lab 03 · Consumer Groups & Partition Assignment
+# Consumer Groups & Partition Assignment (Lab 03)
 
 !!! info "Theory"
-    Read [04 · Consumer Groups & Offsets](../theory/04-consumer-groups-and-offsets.md) first.
+    Read [Consumer Groups & Offsets (04)](../theory/04-consumer-groups-and-offsets.md) first.
 
 **Goal:** Observe partition assignment, rebalancing, and consumer lag. Compare behaviour of different consumer groups consuming the same topic independently.
 
@@ -181,5 +181,5 @@ docker exec kafka kafka-consumer-groups \
 - ✅ Triggered a rebalance by starting/stopping a second consumer instance
 - ✅ Used `--reset-offsets` to replay historical messages
 
-**Next:** [Lab 04 · Error Handling & Retry](lab-04-error-handling.md)
+**Next:** [Error Handling & Exponential Backoff Retry (Lab 04)](lab-04-error-handling.md)
 

@@ -767,7 +767,7 @@ Resubmit:
 ## Next Steps
 
 - **Labs 04–06**: Test error handling, DLT, and Avro hands-on
-- **Scenario Questions**: [04 · Scenario & System Design](04-scenario-questions.md)
-- **Theory Deep Dive**: [Theory 05 · Error Handling & DLT](../theory/05-error-handling-and-dlt.md)
+- **Scenario Questions**: [Scenario & System Design (04)](04-scenario-questions.md)
+- **Theory Deep Dive**: [Error Handling & Dead Letter Topics (05)](../theory/05-error-handling-and-dlt.md)
 
 

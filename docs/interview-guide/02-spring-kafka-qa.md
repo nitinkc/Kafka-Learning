@@ -716,7 +716,7 @@ props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");  // Compress for th
 ## Next Steps
 
 - **Lab 02–07**: Implement these patterns hands-on
-- **Error Handling Q&A**: [03 · Error Handling & Schema](03-error-handling-qa.md)
+- **Error Handling Q&A**: [Error Handling & Schema Q&A (03)](03-error-handling-qa.md)
 - **Theory Deep Dive**: [Theory 02 · Spring Kafka Setup](../theory/02-spring-kafka-setup.md)
 
 

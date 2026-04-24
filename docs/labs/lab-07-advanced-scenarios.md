@@ -1,7 +1,7 @@
-# Lab 07 · Advanced Scenarios
+# Advanced Scenarios (Lab 07)
 
 !!! info "Theory"
-    Read [07 · Advanced Patterns](../theory/07-advanced-patterns.md) first.
+    Read [Advanced Patterns (07)](../theory/07-advanced-patterns.md) first.
 
 **Goal:** Tune retry backoff, explore schema evolution, understand concurrency settings, and put it all together with an end-to-end event flow observation.
 

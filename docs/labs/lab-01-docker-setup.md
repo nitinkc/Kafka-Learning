@@ -1,7 +1,7 @@
-# Lab 01 · Docker Setup & Kafka Fundamentals
+# Docker Setup & Kafka Fundamentals (Lab 01)
 
 !!! info "Theory"
-    Read [01 · Kafka Fundamentals](../theory/01-kafka-fundamentals.md) first.
+    Read [Kafka Fundamentals (01)](../theory/01-kafka-fundamentals.md) first.
 
 **Goal:** Start the full Kafka infrastructure with Docker, verify every service is healthy, and explore the Kafka-UI dashboard.
 
@@ -213,5 +213,5 @@ docker compose up -d     # fresh start
 - ✅ Used Kafka-UI to inspect topics, partitions, and messages
 - ✅ Understood the relationship between Topics → Partitions → Offsets
 
-**Next:** [Lab 02 · First Producer & Consumer](lab-02-first-producer-consumer.md)
+**Next:** [First Producer & Consumer (Lab 02)](lab-02-first-producer-consumer.md)
 

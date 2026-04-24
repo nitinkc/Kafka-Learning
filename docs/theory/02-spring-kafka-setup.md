@@ -1,4 +1,4 @@
-# 02 · Spring Kafka Setup
+# Spring Kafka Setup (02)
 
 !!! abstract "Learning Objectives"
     - Add the correct Spring Kafka dependencies
@@ -243,7 +243,7 @@ public ObjectMapper kafkaObjectMapper() {
 
 ## Up Next
 
-➡️ [03 · Producers & Consumers](03-producers-and-consumers.md)
+➡️ [Producers & Consumers (03)](03-producers-and-consumers.md)
 
-**Hands-on now?** → [Lab 02 · First Producer & Consumer](../labs/lab-02-first-producer-consumer.md)
+**Hands-on now?** → [First Producer & Consumer (Lab 02)](../labs/lab-02-first-producer-consumer.md)
 

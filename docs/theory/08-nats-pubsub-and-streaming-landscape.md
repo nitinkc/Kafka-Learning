@@ -1,4 +1,4 @@
-# 08 · NATS.io, Google Pub/Sub & The Messaging Landscape
+# NATS.io, Google Pub/Sub & The Messaging Landscape (08)
 
 !!! abstract "Learning Objectives"
     After this module you will be able to:
@@ -487,5 +487,5 @@ Entire event backbone — streams, K/V config, work queues — runs in a **singl
 
 ➡️ You've reached the end of the core theory modules. Review the [Interview Guide](../interview-guide/index.md) to test your knowledge.
 
-**Want hands-on practice?** → [Lab 07 · Advanced Scenarios](../labs/lab-07-advanced-scenarios.md)
+**Want hands-on practice?** → [Advanced Scenarios (Lab 07)](../labs/lab-07-advanced-scenarios.md)
 

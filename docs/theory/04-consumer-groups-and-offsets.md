@@ -1,4 +1,4 @@
-# 04 · Consumer Groups & Offsets
+# Consumer Groups & Offsets (04)
 
 !!! abstract "Learning Objectives"
     - Explain consumer group mechanics and partition assignment
@@ -173,7 +173,7 @@ This topic records `(group_id, topic, partition) → committed_offset` for every
 
 ## Up Next
 
-➡️ [05 · Error Handling & DLT](05-error-handling-and-dlt.md)
+➡️ [Error Handling & Dead Letter Topics (05)](05-error-handling-and-dlt.md)
 
-**Hands-on now?** → [Lab 03 · Consumer Groups](../labs/lab-03-consumer-groups.md)
+**Hands-on now?** → [Consumer Groups & Partition Assignment (Lab 03)](../labs/lab-03-consumer-groups.md)
 

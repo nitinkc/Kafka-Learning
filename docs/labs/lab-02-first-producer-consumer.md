@@ -1,7 +1,7 @@
-# Lab 02 · First Producer & Consumer
+# First Producer & Consumer (Lab 02)
 
 !!! info "Theory"
-    Read [02 · Spring Kafka Setup](../theory/02-spring-kafka-setup.md) and [03 · Producers & Consumers](../theory/03-producers-and-consumers.md) first.
+    Read [Spring Kafka Setup (02)](../theory/02-spring-kafka-setup.md) and [Producers & Consumers (03)](../theory/03-producers-and-consumers.md) first.
 
 **Goal:** Start the Spring Boot app, produce JSON events via REST, and observe them consumed with partition and offset metadata in the logs.
 
@@ -199,5 +199,5 @@ curl -s -X POST "http://localhost:8080/api/kafka/events/test?eventType=ORDER_CAN
 - ✅ Confirmed LAG=0 after all messages are acknowledged
 - ✅ Understood how `auto.offset.reset=latest` affects new vs. existing consumer groups
 
-**Next:** [Lab 03 · Consumer Groups](lab-03-consumer-groups.md)
+**Next:** [Consumer Groups & Partition Assignment (Lab 03)](lab-03-consumer-groups.md)
 

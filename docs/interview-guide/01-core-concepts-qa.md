@@ -547,7 +547,7 @@ Partition 0:
 ## Next Steps
 
 - **Lab 01–07**: Implement these concepts hands-on
-- **Spring Kafka Q&A**: [02 · Spring Kafka](02-spring-kafka-qa.md) — How Spring Boot integrates with Kafka
-- **Theory Deep Dive**: [Theory 04 · Consumer Groups & Offsets](../theory/04-consumer-groups-and-offsets.md)
+- **Spring Kafka Q&A**: [Spring Kafka Setup (02)](02-spring-kafka-qa.md) — How Spring Boot integrates with Kafka
+- **Theory Deep Dive**: [Consumer Groups & Offsets (04)](../theory/04-consumer-groups-and-offsets.md)
 
 

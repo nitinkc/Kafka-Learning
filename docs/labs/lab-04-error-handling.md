@@ -1,7 +1,7 @@
-# Lab 04 · Error Handling & Exponential Backoff Retry
+# Error Handling & Exponential Backoff Retry (Lab 04)
 
 !!! info "Theory"
-    Read [05 · Error Handling & DLT](../theory/05-error-handling-and-dlt.md) first.
+    Read [Error Handling & Dead Letter Topics (05)](../theory/05-error-handling-and-dlt.md) first.
 
 **Goal:** Trigger transient, permanent, and validation errors. Observe the exponential backoff retry sequence in logs and confirm failed messages land in the DLT.
 
@@ -195,5 +195,5 @@ errorType=TRANSIENT → TransientException thrown in ManualAckConsumer
 - ✅ Inspected DLT diagnostic headers in Kafka-UI
 - ✅ Understood the difference between TRANSIENT, PERMANENT, and VALIDATION error types
 
-**Next:** [Lab 05 · Dead Letter Topic Deep Dive](lab-05-dead-letter-topic.md)
+**Next:** [Dead Letter Topic Deep Dive (Lab 05)](lab-05-dead-letter-topic.md)
 

@@ -1,4 +1,4 @@
-# 01 · Kafka Fundamentals
+# Kafka Fundamentals (01)
 
 !!! abstract "Learning Objectives"
     After this module you will be able to:
@@ -201,7 +201,7 @@ This project has **three consumer groups**:
 
 ## Up Next
 
-➡️ [02 · Spring Kafka Setup](02-spring-kafka-setup.md) — how to wire Kafka into your Spring Boot application.
+➡️ [Spring Kafka Setup (02)](02-spring-kafka-setup.md) — how to wire Kafka into your Spring Boot application.
 
-**Hands-on now?** → [Lab 01 · Docker Setup](../labs/lab-01-docker-setup.md)
+**Hands-on now?** → [Docker Setup & Kafka Fundamentals (Lab 01)](../labs/lab-01-docker-setup.md)
 

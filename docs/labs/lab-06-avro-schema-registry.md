@@ -1,7 +1,7 @@
-# Lab 06 · Avro & Schema Registry
+# Avro & Schema Registry (Lab 06)
 
 !!! info "Theory"
-    Read [06 · Avro & Schema Registry](../theory/06-avro-and-schema-registry.md) first.
+    Read [Avro & Schema Registry (06)](../theory/06-avro-and-schema-registry.md) first.
 
 **Goal:** Send Avro-encoded events, verify schema auto-registration, inspect the Schema Registry API, and trigger a schema validation failure.
 
@@ -230,5 +230,5 @@ The message **never reaches the broker** — schema validation at the producer p
 - ✅ Understood the Confluent 5-byte wire format prefix
 - ✅ Confirmed schema validation errors prevent corrupt data from entering Kafka
 
-**Next:** [Lab 07 · Advanced Scenarios](lab-07-advanced-scenarios.md)
+**Next:** [Advanced Scenarios (Lab 07)](lab-07-advanced-scenarios.md)
 

@@ -1,4 +1,4 @@
-# 03 · Producers & Consumers
+# Producers & Consumers (03)
 
 !!! abstract "Learning Objectives"
     - Understand how `EventProducer` publishes JSON events
@@ -215,7 +215,7 @@ This lets you trigger produce/consume flows with a simple `curl` command — no 
 
 ## Up Next
 
-➡️ [04 · Consumer Groups & Offsets](04-consumer-groups-and-offsets.md)
+➡️ [Consumer Groups & Offsets (04)](04-consumer-groups-and-offsets.md)
 
-**Hands-on now?** → [Lab 02 · First Producer & Consumer](../labs/lab-02-first-producer-consumer.md)
+**Hands-on now?** → [First Producer & Consumer (Lab 02)](../labs/lab-02-first-producer-consumer.md)
 

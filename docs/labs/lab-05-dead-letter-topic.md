@@ -1,7 +1,7 @@
-# Lab 05 · Dead Letter Topic Deep Dive
+# Dead Letter Topic Deep Dive (Lab 05)
 
 !!! info "Theory"
-    Read [05 · Error Handling & DLT](../theory/05-error-handling-and-dlt.md) first.
+    Read [Error Handling & Dead Letter Topics (05)](../theory/05-error-handling-and-dlt.md) first.
 
 **Goal:** Deeply explore the DLT consumer pattern — observe DLT headers, AdminClient record deletion, and understand how the DLT prevents stuck partitions.
 
@@ -224,5 +224,5 @@ DeadLetterConsumer.consumeDeadLetter()
 - ✅ Proved that DLT routing unblocks the main partition for subsequent messages
 - ✅ Understood the ack-before-delete ordering decision and its implications
 
-**Next:** [Lab 06 · Avro & Schema Registry](lab-06-avro-schema-registry.md)
+**Next:** [Avro & Schema Registry (Lab 06)](lab-06-avro-schema-registry.md)
 

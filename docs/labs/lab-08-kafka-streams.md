@@ -1,4 +1,4 @@
-# Lab 08 · Kafka Streams
+# Kafka Streams (Lab 08)
 
 !!! info "Learning Goal"
     Build an **order enrichment + aggregation pipeline** using Kafka Streams. You'll implement:
@@ -791,7 +791,7 @@ In the same topology, compute:
 
 ## Next Steps
 
-- Read [09 · Kafka Streams Theory](../theory/09-kafka-streams.md) for deeper concepts
+- Read [Kafka Streams (09)](../theory/09-kafka-streams.md) for deeper concepts
 - Explore **Session Windows** (dynamic based on inactivity)
 - Implement **Exactly-Once Semantics** (EOS) and measure performance impact
 - Add **Prometheus metrics** to monitor your topology

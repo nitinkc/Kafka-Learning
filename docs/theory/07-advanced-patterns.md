@@ -1,4 +1,4 @@
-# 07 · Advanced Patterns
+# Advanced Patterns (07)
 
 !!! abstract "Learning Objectives"
     - Understand multi-factory and multi-topic listener configuration
@@ -215,5 +215,5 @@ graph TD
 
 You've completed the core theory modules. Next, dive into **Module 09: Kafka Streams** for client-side stream processing, or head to the **Interview Guide** to test your knowledge.
 
-➡️ [09 · Kafka Streams](09-kafka-streams.md) | [Interview Guide](../interview-guide/index.md)
+➡️ [Kafka Streams (09)](09-kafka-streams.md) | [Interview Guide](../interview-guide/index.md)
 
